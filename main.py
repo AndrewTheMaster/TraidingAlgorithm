@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as pl
 
-def getCandles(symb, tf):
+def getCandles(symb, tf, ):
     url = 'https://api.bybit.com'
     path = '/v5/market/kline'
     URL = url + path
@@ -22,7 +22,7 @@ def getCandles(symb, tf):
     m.to_csv('output.csv', index=False)
     return m
 
-def getAlert(df, tf):
+def getAlert(df, tf, OBMitigationType, sens):
     df['Date'] = pd.to_datetime(df['Date'])
     df.set_index('Date', inplace=True)  # Устанавливаем индекс в формате DatetimeIndex
     df.index.freq = tf  # Установка частоты в минутах
@@ -31,7 +31,7 @@ def getAlert(df, tf):
     shortBoxes = []
     longBoxes = []
     # Параметры для создания блоков заявок
-    sens = 28
+    
     sens /= 100
 
 
@@ -44,27 +44,22 @@ def getAlert(df, tf):
 
     # Создайте столбец last_cross_index с начальными значениями None
     df['last_cross_index'] = None
-    df['last_cross_index_bull'] = None
+    #df['last_cross_index_bull'] = None
 
     # Используйте векторизованные операции для установки значений в столбец
     condition1 = (df['ob_created']).values
     df.loc[condition1, 'last_cross_index'] = 0
     condition2 = (df['ob_created_bull']).values
-    df.loc[condition2, 'last_cross_index_bull'] = 0
+    df.loc[condition2, 'last_cross_index'] = 0
 
 
     df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
     df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
     df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
     df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
-
-    df.loc[df['last_cross_index_bull'].isnull(), 'last_cross_index_bull'] = df['last_cross_index_bull'].shift(1) + 1
-    df.loc[df['last_cross_index_bull'].isnull(), 'last_cross_index_bull'] = df['last_cross_index_bull'].shift(1) + 1
-    df.loc[df['last_cross_index_bull'].isnull(), 'last_cross_index_bull'] = df['last_cross_index_bull'].shift(1) + 1
-    df.loc[df['last_cross_index_bull'].isnull(), 'last_cross_index_bull'] = df['last_cross_index_bull'].shift(1) + 1
 
     ob_created_df = df[df['ob_created'] & df['last_cross_index'].shift(1).isnull()]
-    ob_created_bull_df = df[df['ob_created_bull'] & df['last_cross_index_bull'].shift(1).isnull()]
+    ob_created_bull_df = df[df['ob_created_bull'] & df['last_cross_index'].shift(1).isnull()]
     #print(ob_created_df)
     #print(ob_created_bull_df)
 
@@ -106,8 +101,43 @@ def getAlert(df, tf):
                     #print(df.shift(i).iloc[last_red])
 
                     break
+   
+    print("shortboxes")
     print(shortBoxes)
+    print("longboxes")
     print(longBoxes)
+    df['OBBullMitigation'] = np.where(OBMitigationType == 'Close', df['Close'].shift(1), df['Low'])
+    df['OBBearMitigation'] = np.where(OBMitigationType == 'Close', df['Close'].shift(1), df['High'])
+    print("1111")
+    print(df)
+    #shortBoxes['prod'] = pd.to_datetime(shortBoxes['prod'])
+    #condition = (df['OBBearMitigation'] > df['High']) & (df.index.isin(shortBoxes['prod']))
+    #shortBoxes = shortBoxes[~condition]
+    
+    for date in longBoxes:
+        start_index = df.index.get_loc(date['prod'])
+        for index in range(start_index, len(df)):
+            print(df.iloc[index]['OBBullMitigation'])
+            print(df.iloc[index]['Low'])
+            print("11111111")
+            break
+            if df.iloc[index]['OBBullMitigation'] < df.iloc[index]['Low']:
+                print(df.iloc[index])
+                longBoxes = longBoxes.drop(index)
+
+    for date in shortBoxes:
+        start_index = df.index.get_loc(date['prod'])
+        for index in range(start_index, len(df)):
+            if df.iloc[index]['OBBearMitigation'] > df.iloc[index]['High']:
+                print(df.iloc[index])
+                shortBoxes = shortBoxes.drop(index)
+
+   
+    print("111shortboxes")
+    print(shortBoxes)
+    print("111longboxes")
+    print(longBoxes)
+
     # # Оповещения для медвежьих блоков
     # for i in range(1, len(ob_created_df)):
     #     if (ob_created_df['Close'].iloc[i] > ob_created_df['High'].iloc[i - 1]) and \
@@ -125,7 +155,7 @@ def getAlert(df, tf):
     return df
 df = getCandles('BTCUSDT', '30')
 print(df)
-print(getAlert(df, '30min'))
+print(getAlert(df, '30min', 'Close', 28))
 #for index, row in df.iterrows():
     #ob_created_bear = False
     #ob_created_bull = False
