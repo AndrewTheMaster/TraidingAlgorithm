@@ -65,8 +65,6 @@ def getAlert(df, tf, OBMitigationType, sens):
 
     bearish_dates = ob_created_df.index
     bullish_dates = ob_created_bull_df.index
-    print(bearish_dates)
-    print(bullish_dates)
 
     for date in bearish_dates:
         index_of_date = df.index.get_loc(date)
@@ -102,41 +100,55 @@ def getAlert(df, tf, OBMitigationType, sens):
 
                     break
    
-    print("shortboxes")
-    print(shortBoxes)
-    print("longboxes")
-    print(longBoxes)
+  
     df['OBBullMitigation'] = np.where(OBMitigationType == 'Close', df['Close'].shift(1), df['Low'])
     df['OBBearMitigation'] = np.where(OBMitigationType == 'Close', df['Close'].shift(1), df['High'])
-    print("1111")
-    print(df)
     #shortBoxes['prod'] = pd.to_datetime(shortBoxes['prod'])
     #condition = (df['OBBearMitigation'] > df['High']) & (df.index.isin(shortBoxes['prod']))
     #shortBoxes = shortBoxes[~condition]
     
+    newLongBoxes = []
+
     for date in longBoxes:
         start_index = df.index.get_loc(date['prod'])
+        keep_date = True
+
         for index in range(start_index, len(df)):
-            print(df.iloc[index]['OBBullMitigation'])
-            print(df.iloc[index]['Low'])
-            print("11111111")
-            break
-            if df.iloc[index]['OBBullMitigation'] < df.iloc[index]['Low']:
-                print(df.iloc[index])
-                longBoxes = longBoxes.drop(index)
+
+            if df.iloc[index]['OBBullMitigation'] < df.iloc[start_index]['Low']:
+                keep_date = False
+                break
+        
+        if keep_date:
+            newLongBoxes.append(date)
+
+    longBoxes = newLongBoxes
+
+    newShortBoxes = []
 
     for date in shortBoxes:
         start_index = df.index.get_loc(date['prod'])
+        keep_date = True
+
         for index in range(start_index, len(df)):
-            if df.iloc[index]['OBBearMitigation'] > df.iloc[index]['High']:
-                print(df.iloc[index])
-                shortBoxes = shortBoxes.drop(index)
+            if df.iloc[index]['OBBearMitigation'] > df.iloc[start_index]['High']:
+                keep_date = False
+                
+                break
+        
+        if keep_date:
+            newShortBoxes.append(date)
+
+
+    shortBoxes = newShortBoxes
+
 
    
-    print("111shortboxes")
+    print("shortboxes")
     print(shortBoxes)
-    print("111longboxes")
+    print("longboxes")
     print(longBoxes)
+
 
     # # Оповещения для медвежьих блоков
     # for i in range(1, len(ob_created_df)):
@@ -151,7 +163,7 @@ def getAlert(df, tf, OBMitigationType, sens):
     #             (ob_created_bull_df['Close'].iloc[i] < ob_created_bull_df['High'].iloc[i - 1]) and \
     #             abs(ob_created_bull_df['High'].iloc[i] - ob_created_bull_df['Low'].iloc[i - 1]) < 0.0001:
     #         print(f"Alert: Price inside Double Bullish OB at {ob_created_bull_df.index[i]}")
-    df.to_csv('output11.csv')
+    df.to_csv('output111.csv')
     return df
 df = getCandles('BTCUSDT', '30')
 print(df)
