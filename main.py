@@ -3,13 +3,16 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as pl
 
-def getCandles(symb, tf, ):
+def getCandles(symb, tf, limit):
     url = 'https://api.bybit.com'
     path = '/v5/market/kline'
     URL = url + path
-    params = {'category': 'spot', 'symbol': symb, 'interval': tf}
+
+    params = {'category': 'spot', 'symbol': symb, 'interval': tf, 'limit': limit}
     r = requests.get(URL, params=params)
     df = pd.DataFrame(r.json()['result']['list'])
+
+    # Обработка данных как в вашем коде
     m = pd.DataFrame()
     m['Date'] = df.iloc[:, 0].astype(np.int64)
     m['Date'] = pd.to_datetime(m['Date'], unit='ms')
@@ -19,9 +22,8 @@ def getCandles(symb, tf, ):
     m['Close'] = df.iloc[:, 4].astype(float)
     m['Volume'] = df.iloc[:, 5].astype(float)
     m = m.sort_values(by='Date')
-    m.to_csv('output.csv', index=False)
-    return m
 
+    return m
 def getAlert(df, tf, OBMitigationType, sens):
     df['Date'] = pd.to_datetime(df['Date'])
     df.set_index('Date', inplace=True)  # Устанавливаем индекс в формате DatetimeIndex
@@ -151,21 +153,59 @@ def getAlert(df, tf, OBMitigationType, sens):
 
 
     # # Оповещения для медвежьих блоков
-    # for i in range(1, len(ob_created_df)):
-    #     if (ob_created_df['Close'].iloc[i] > ob_created_df['High'].iloc[i - 1]) and \
-    #             (ob_created_df['Close'].iloc[i] > ob_created_df['Low'].iloc[i - 1]) and \
-    #             abs(ob_created_df['High'].iloc[i] - ob_created_df['Low'].iloc[i - 1]) < 0.0001:
-    #         print(f"Alert: Price inside Double Bearish OB at {ob_created_df.index[i]}")
-    #
+    if (len(shortBoxes)>1):
+         for i in range(0, len(shortBoxes)-1):
+             """print("shortBoxes(i)")
+             print(shortBoxes[i]['prod'])
+             print("shortBoxes(i+1)")
+             print(shortBoxes[i+1]['prod'])"""
+             sbox=df.index.get_loc(shortBoxes[i]['prod'])
+             prev_sbox=df.index.get_loc(shortBoxes[i+1]['prod'])
+             top = df.iloc[sbox]['High']
+             prev_top = df.iloc[prev_sbox]['High']
+             bot = df.iloc[sbox]['Low']
+             prev_bot = df.iloc[prev_sbox]['Low']
+             """print("top")
+             print(top)
+             print("prev_top")
+             print(prev_top)
+             print("bot")
+             print(bot)
+             print("prev_bot")
+             print(prev_bot)"""
+             for index in range(prev_sbox, len(df)):
+                high = df.iloc[index]['High']
+                if not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0):
+                 print(f"Alert: Price inside Double Bearish OB at {df.index[index ]}")
+
     # # Оповещения для бычьих блоков
-    # for i in range(1, len(ob_created_bull_df)):
-    #     if (ob_created_bull_df['Close'].iloc[i] < ob_created_bull_df['Low'].iloc[i - 1]) and \
-    #             (ob_created_bull_df['Close'].iloc[i] < ob_created_bull_df['High'].iloc[i - 1]) and \
-    #             abs(ob_created_bull_df['High'].iloc[i] - ob_created_bull_df['Low'].iloc[i - 1]) < 0.0001:
-    #         print(f"Alert: Price inside Double Bullish OB at {ob_created_bull_df.index[i]}")
+    if (len(longBoxes) > 1):
+        for i in range(0, len(longBoxes)-1):
+             """print("longBoxes(i)")
+             print(longBoxes[i]['prod'])
+             print("longBoxes(i+1)")
+             print(longBoxes[i+1]['prod'])"""
+             sbox=df.index.get_loc(longBoxes[i]['prod'])
+             prev_sbox=df.index.get_loc(longBoxes[i+1]['prod'])
+             top = df.iloc[sbox]['High']
+             prev_top = df.iloc[prev_sbox]['High']
+             bot = df.iloc[sbox]['Low']
+             prev_bot = df.iloc[prev_sbox]['Low']
+             """print("top")
+             print(top)
+             print("prev_top")
+             print(prev_top)
+             print("bot")
+             print(bot)
+             print("prev_bot")
+             print(prev_bot)"""
+             for index in range(prev_sbox, len(df)):
+                low = df.iloc[index]['Low']
+                if (not(low>top) and not(low >prev_top) and ((bot - prev_top)<0 or (prev_bot - top)<0)):
+                    print(f"Alert: Price inside Double Bullish OB at {df.index[index ]}")
     df.to_csv('output111.csv')
     return df
-df = getCandles('BTCUSDT', '30')
+df = getCandles('BTCUSDT', '30',300)
 print(df)
 print(getAlert(df, '30min', 'Close', 28))
 #for index, row in df.iterrows():
