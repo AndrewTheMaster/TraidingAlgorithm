@@ -175,7 +175,7 @@ def getAlert(df, tf, OBMitigationType, sens):
              print(prev_bot)"""
              for index in range(prev_sbox, len(df)):
                 high = df.iloc[index]['High']
-                if not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0):
+                if (not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0)):
                  print(f"Alert: Price inside Double Bearish OB at {df.index[index ]}")
 
     # # Оповещения для бычьих блоков
