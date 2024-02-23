@@ -24,6 +24,31 @@ def getCandles(symb, tf, limit):
     m = m.sort_values(by='Date')
 
     return m
+
+def getCandlesHeikenAshi(symb, tf, limit):
+    url = 'https://api.bybit.com'
+    path = '/v5/market/kline'
+    URL = url + path
+
+    params = {'category': 'spot', 'symbol': symb, 'interval': tf, 'limit': limit}
+    r = requests.get(URL, params=params)
+    df = pd.DataFrame(r.json()['result']['list'])
+    print("data")
+    print(df)
+
+    # Преобразование в хайкен-аши
+    m = pd.DataFrame()
+    m['Date'] = df.iloc[:, 0].astype(np.int64)
+    m['Date'] = pd.to_datetime(m['Date'], unit='ms')
+    m['Close'] = (df.iloc[:, 1].astype(float) + df.iloc[:, 2].astype(float) + df.iloc[:, 3].astype(float) + df.iloc[:, 4].astype(float)) / 4.0
+    m['Open'] = (m['Close'].shift(1) + m['Close'].shift(1) + m['Close'].shift(1) + m['Close'].shift(1)) / 4.0
+    m['High'] = df.iloc[:, 1:5].max(axis=1)
+    m['Low'] = df.iloc[:, 1:5].min(axis=1)
+    m['Volume'] = df.iloc[:, 5].astype(float)
+    m = m.sort_values(by='Date')
+
+    return m
+   
 def getAlert(df, tf, OBMitigationType, sens):
     df['Date'] = pd.to_datetime(df['Date'])
     df.set_index('Date', inplace=True)  # Устанавливаем индекс в формате DatetimeIndex
@@ -135,7 +160,6 @@ def getAlert(df, tf, OBMitigationType, sens):
         for index in range(start_index, len(df)):
             if df.iloc[index]['OBBearMitigation'] > df.iloc[start_index]['High']:
                 keep_date = False
-                
                 break
         
         if keep_date:
@@ -151,7 +175,7 @@ def getAlert(df, tf, OBMitigationType, sens):
     print("longboxes")
     print(longBoxes)
 
-
+   
     # # Оповещения для медвежьих блоков
     if (len(shortBoxes)>1):
          for i in range(0, len(shortBoxes)-1):
@@ -176,7 +200,11 @@ def getAlert(df, tf, OBMitigationType, sens):
              for index in range(prev_sbox, len(df)):
                 high = df.iloc[index]['High']
                 if (not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0)):
-                 print(f"Alert: Price inside Double Bearish OB at {df.index[index ]}")
+                    print(f"Alert: Price inside Double Bearish OB at {df.index[index ]}")
+                    if (0.975>=(df.iloc[index]['Open'] - df.iloc[index]['Close'])/(df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])>=1.025)   and (df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])!=0:#Последняя свеча поглощает вторую
+                        if (df.iloc[index-1]['Open'] - df.iloc[index-1]['Low'])/(df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])>=3   and (df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])!=0: #Проверка второй свечи на то что она пинбар
+                            if index>2 and (0.975>=(df.iloc[index-2]['High']-df.iloc[index-2]['Close'])/ (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>=1.025)  and (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
+                                print("yesssssssss!")
 
     # # Оповещения для бычьих блоков
     if (len(longBoxes) > 1):
@@ -203,11 +231,24 @@ def getAlert(df, tf, OBMitigationType, sens):
                 low = df.iloc[index]['Low']
                 if (not(low>top) and not(low >prev_top) and ((bot - prev_top)<0 or (prev_bot - top)<0)):
                     print(f"Alert: Price inside Double Bullish OB at {df.index[index ]}")
+                    if (0.975>=(df.iloc[index]['Close'] - df.iloc[index]['Open'])/(df.iloc[index-1]['High']-df.iloc[index-1]['Close'])>=1.025)   and (df.iloc[index-1]['High']-df.iloc[index-1]['Close'])!=0:#Последняя свеча поглощает вторую
+                        if (df.iloc[index-1]['High'] - df.iloc[index-1]['Open'])/(df.iloc[index-1]['Open'] - df.iloc[index-1]['Close'])>=3   and (df.iloc[index-1]['Open'] - df.iloc[index-1]['Close'])!=0: #Проверка второй свечи на то что она пинбар
+                            if index>2 and (0.975>=(df.iloc[index-2]['Close']-df.iloc[index-2]['Low'])/ (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>=1.025)  and (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
+                                print("yesssssssss!")
+
+
+
+                    
+
+
     df.to_csv('output111.csv')
     return df
 df = getCandles('BTCUSDT', '30',300)
 print(df)
 print(getAlert(df, '30min', 'Close', 28))
+df = getCandlesHeikenAshi('BTCUSDT', '30',300)
+print("CandlesHeikenAshi")
+print(df)
 #for index, row in df.iterrows():
     #ob_created_bear = False
     #ob_created_bull = False
