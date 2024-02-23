@@ -32,22 +32,27 @@ def getCandlesHeikenAshi(symb, tf, limit):
 
     params = {'category': 'spot', 'symbol': symb, 'interval': tf, 'limit': limit}
     r = requests.get(URL, params=params)
-    df = pd.DataFrame(r.json()['result']['list'])
-    print("data")
-    print(df)
+    D = pd.DataFrame(r.json()['result']['list'])
+    print(D)
+    HAdf = pd.DataFrame()
+    HAdf['Date'] = D.iloc[:, 0].astype(np.int64)
+    HAdf['Date'] = pd.to_datetime(HAdf['Date'], unit='ms')
+    HAdf['Close'] = round(((D.iloc[:, 1].astype(float) + D.iloc[:, 2].astype(float) + D.iloc[:, 3].astype(float) + D.iloc[:, 4].astype(float))/4), 4)
 
-    # Преобразование в хайкен-аши
-    m = pd.DataFrame()
-    m['Date'] = df.iloc[:, 0].astype(np.int64)
-    m['Date'] = pd.to_datetime(m['Date'], unit='ms')
-    m['Close'] = (df.iloc[:, 1].astype(float) + df.iloc[:, 2].astype(float) + df.iloc[:, 3].astype(float) + df.iloc[:, 4].astype(float)) / 4.0
-    m['Open'] = (m['Close'].shift(1) + m['Close'].shift(1) + m['Close'].shift(1) + m['Close'].shift(1)) / 4.0
-    m['High'] = df.iloc[:, 1:5].max(axis=1)
-    m['Low'] = df.iloc[:, 1:5].min(axis=1)
-    m['Volume'] = df.iloc[:, 5].astype(float)
-    m = m.sort_values(by='Date')
+    for i in range(len(D)-1, -1, -1):
+        if i == len(D)-1:
+            HAdf.at[i, 'Open'] = round(((D.iloc[:, 1].astype(float).iloc[i] + D.iloc[:, 4].astype(float).iloc[i])/2), 4)
+        else:
+            HAdf.at[i, 'Open'] = round(((HAdf.at[i+1, 'Open'] + HAdf.at[i+1, 'Close'])/2), 4)
 
-    return m
+
+    HAdf['High'] = HAdf[['Open', 'Close']].join(D.iloc[:, 2].astype(float)).max(axis=1)
+    HAdf['Low'] = HAdf[['Open', 'Close']].join(D.iloc[:, 3].astype(float)).min(axis=1)
+    HAdf['Volume'] = D.iloc[:, 5].astype(float)
+
+    # Reordering columns
+    HAdf = HAdf[['Date', 'Close', 'Open', 'High', 'Low', 'Volume']]
+    return HAdf
    
 def getAlert(df, tf, OBMitigationType, sens):
     df['Date'] = pd.to_datetime(df['Date'])
