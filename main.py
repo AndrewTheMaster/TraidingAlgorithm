@@ -3,7 +3,37 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as pl
 import csv
+def merge_dataframes(df1, df2):
+    # Преобразование индексов в тип datetime, если они не являются таковыми
+    #df1.index = pd.to_datetime(df1.index)
+    #df2.index = pd.to_datetime(df2.index)
+    df2 = df2.add_suffix('_y')
 
+    # Мердж с использованием индексов
+    merged_df = pd.concat([df1, df2], axis=1, join='outer')
+
+    # Замена значений из второго фрейма в соответствующих ячейках
+    for index, row in df2.iterrows():
+        if index in df1.index:
+            for column in df2.columns:
+                # Проверка, что столбец из df2 является столбцом суффикса '_y'
+                if column.endswith('_y'):
+                    # Получение соответствующего имени столбца в df1
+                    original_column = column[:-2]
+                    
+                    # Присваивание значения из df2 в соответствующую ячейку df1
+                    merged_df.at[index, original_column] = row[column]
+
+
+
+    # Выбор столбцов, заканчивающихся на '_y'
+    columns_to_drop = merged_df.filter(like='_y').columns
+
+    # Удаление выбранных столбцов
+    merged_df = merged_df.drop(columns=columns_to_drop)
+    merged_df = merged_df.dropna()
+    merged_df = merged_df.sort_values(by='Date')
+    return merged_df
 def getCandles(symb, tf, limit):
     url = 'https://api.bybit.com'
     path = '/v5/market/kline'
@@ -62,7 +92,10 @@ def getCandlesHeikenAshi(symb, tf, limit):
         print(start_date)
 
         important_index =  last_row.index
+        print("important_index")
         print(important_index)
+        print("important_index")
+        print(m.columns)
         start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
         print(start_index)
         # Начинаем с найденного индекса в DataFrame m
@@ -79,9 +112,26 @@ def getCandlesHeikenAshi(symb, tf, limit):
             print(m.loc[index, 'Open'])
         m['High'] = m.iloc[:, 1:5].max(axis=1)
         m['Low'] = m.iloc[:, 1:5].min(axis=1)
+        CSVdf['Date'] = pd.to_datetime(CSVdf['Date'])
+        print("m")
+        print(m)
+        print("CSVdf")
+        print(CSVdf)
 
-        m_without_last_row = m.iloc[:-1]  # Исключаем последнюю строку
+
+        m = merge_dataframes(m, CSVdf)
+        print("merged_m")
+        print(m)
+ 
+    
+
+        
+
+        #m_without_last_row = m.iloc[:-1]  # Исключаем последнюю строку
+        m_without_last_row = m
         m_without_last_row.to_csv("CandlesHeikenAshi.csv", index=False, mode='w')
+    
+
 
 
     return m
