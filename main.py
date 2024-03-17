@@ -11,25 +11,26 @@ def merge_dataframes(df1, df2):
 
     # Мердж с использованием индексов
     merged_df = pd.concat([df1, df2], axis=1, join='outer')
-
+    
     # Замена значений из второго фрейма в соответствующих ячейках
+    print(merged_df)
     for index, row in df2.iterrows():
-        if index in df1.index:
+        date_value = row['Date_y']  # Значение даты из второго DataFrame
+        corresponding_row = df1[df1['Date'] == date_value]  # Находим соответствующую строку в первом DataFrame по значению даты из второго DataFrame
+        if not corresponding_row.empty:
             for column in df2.columns:
-                # Проверка, что столбец из df2 является столбцом суффикса '_y'
                 if column.endswith('_y'):
-                    # Получение соответствующего имени столбца в df1
-                    original_column = column[:-2]
-                    
-                    # Присваивание значения из df2 в соответствующую ячейку df1
-                    merged_df.at[index, original_column] = row[column]
+                    original_column = column[:-2]  # Получаем имя соответствующего столбца в первом DataFrame
+                    merged_df.at[corresponding_row.index[0], original_column] = row[column]  # Присваиваем значение из второго DataFrame в ячейку первого DataFrame
 
 
+    print(merged_df)
 
     # Выбор столбцов, заканчивающихся на '_y'
     columns_to_drop = merged_df.filter(like='_y').columns
 
     # Удаление выбранных столбцов
+    
     merged_df = merged_df.drop(columns=columns_to_drop)
     merged_df = merged_df.dropna()
     merged_df = merged_df.sort_values(by='Date')
@@ -131,10 +132,10 @@ def getCandlesHeikenAshi(symb, tf, limit):
         m_without_last_row = m
         m_without_last_row.to_csv("CandlesHeikenAshi.csv", index=False, mode='w')
     
+        m_without_last_row =  m_without_last_row[['Date', 'Open', 'High', 'Low', 'Close', 'Volume']]
 
 
-
-    return m
+    return  m_without_last_row
 
     
     
@@ -339,9 +340,10 @@ def getAlert(df, tf, OBMitigationType, sens):
 df = getCandles('BTCUSDT', '30',300)
 print(df)
 print(getAlert(df, '30min', 'Close', 28))
-df = getCandlesHeikenAshi('BTCUSDT', '30',300)
+dft = getCandlesHeikenAshi('BTCUSDT', '30',300)
 print("CandlesHeikenAshi")
-print(df)
+print(dft)
+print(getAlert(dft, '30min', 'Close', 28))
 #for index, row in df.iterrows():
     #ob_created_bear = False
     #ob_created_bull = False
