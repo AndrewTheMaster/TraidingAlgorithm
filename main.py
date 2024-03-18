@@ -244,7 +244,7 @@ def getAlert(df, tf, OBMitigationType, sens):
             newLongBoxes.append(date)
 
     longBoxes = newLongBoxes
-
+    #print(shortBoxes)
     newShortBoxes = []
 
     for date in shortBoxes:
@@ -271,6 +271,45 @@ def getAlert(df, tf, OBMitigationType, sens):
 
    
     # # Оповещения для медвежьих блоков
+    #вхождение в одинарный шортбокс
+    if (len(shortBoxes)>0):
+         for i in range(0, len(shortBoxes)):
+          
+             sbox=df.index.get_loc(shortBoxes[i]['prod'])
+             
+             top = df.iloc[sbox]['High']
+         
+             bot = df.iloc[sbox]['Low']
+          
+             for index in range(sbox, len(df)):
+                high = df.iloc[index]['High']
+                if (not(high < bot) ):
+                    print(f"Alert: Price inside Bearish OB at {df.index[index ]} ")
+                    #first pattern
+                    if (0.975>=(df.iloc[index]['Open'] - df.iloc[index]['Close'])/(df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])>=1.025)   and (df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])!=0:#Последняя свеча поглощает вторую
+                        if (df.iloc[index-1]['Open'] - df.iloc[index-1]['Low'])/(df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])>=3   and (df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])!=0: #Проверка второй свечи на то что она пинбар
+                            if index>2 and (0.975>=(df.iloc[index-2]['High']-df.iloc[index-2]['Close'])/ (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>=1.025)  and (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
+                                print("yesssssssss! first Pattern")
+                    #third pattern
+                    coin = 0
+                    for i in range(1,7):
+                        if (df.iloc[index]['Volume']>(df.iloc[index-i]['Volume']*4)):
+                            coin+=1
+                    if coin > 3:
+                        print("yesssssssss! third Pattern")
+                    #fourth pattern 
+                    for i in range(0,20):
+                        k_coin=0
+                        ArcTop =0
+                        if (df.iloc[index-i]['High']>df.iloc[index-(i+1)]['High']):
+                            k_coin+=1
+                        if (df.iloc[index-i]['High']<df.iloc[index-(i+1)]['High']) and (k_coin==i or ArcTop==1):
+                            if k_coin==i:
+                                    ArcTop=1
+                            if  (not(df.iloc[index-(i+1)]['High']<bot)):
+                                print("yesssssssss! fourth Pattern")
+                        else: break
+    #вхождение в двойной шортбокс
     if (len(shortBoxes)>1):
          for i in range(0, len(shortBoxes)-1):
              """print("shortBoxes(i)")
@@ -283,6 +322,7 @@ def getAlert(df, tf, OBMitigationType, sens):
              prev_top = df.iloc[prev_sbox]['High']
              bot = df.iloc[sbox]['Low']
              prev_bot = df.iloc[prev_sbox]['Low']
+
              """print("top")
              print(top)
              print("prev_top")
@@ -293,14 +333,91 @@ def getAlert(df, tf, OBMitigationType, sens):
              print(prev_bot)"""
              for index in range(prev_sbox, len(df)):
                 high = df.iloc[index]['High']
+                
                 if (not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0)):
                     print(f"Alert: Price inside Double Bearish OB at {df.index[index ]}")
+                    #first pattern
                     if (0.975>=(df.iloc[index]['Open'] - df.iloc[index]['Close'])/(df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])>=1.025)   and (df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])!=0:#Последняя свеча поглощает вторую
                         if (df.iloc[index-1]['Open'] - df.iloc[index-1]['Low'])/(df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])>=3   and (df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])!=0: #Проверка второй свечи на то что она пинбар
                             if index>2 and (0.975>=(df.iloc[index-2]['High']-df.iloc[index-2]['Close'])/ (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>=1.025)  and (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
-                                print("yesssssssss!")
+                                print("yesssssssss! first Pattern")
+                    #third pattern
+                    coin = 0
+                    for i in range(1,7):
+                        if (df.iloc[index]['Volume']>(df.iloc[index-i]['Volume']*4)):
+                            coin+=1
+                    if coin > 3:
+                        print("yesssssssss! third Pattern")
+                #second pattern
+                if (not(high < bot) ):
+                    # если в открытый ордерблок попала свеча 
+                    for i in range(1,10):
+                        # если все свечи зеленые
+                        if((df.iloc[sbox-i]['Open']-df.iloc[sbox-i]['Close'])<0):
+                            k_coin=0
+                            trigger = 0
+                            for k in range(i-1, 0, -1):
+                                # если они прячутся в тени большой свечи
+                                if(df.iloc[sbox-i]['High']<=df.iloc[sbox-k]['High']):
+                                    k_coin+=1
+                                    if (not(df.iloc[sbox-k]['High'] < prev_bot) ):
+                                        trigger = 1
+                                
+                                #если все свечи были зеленые и нашлась такая что смогла спрятать все предыдущие зеленые свечи и у этих свечей была индикация
+                                if(k_coin==(i-1)) and trigger == 1:
+                                    #то проверяю на пулбэк
+                                    if (abs((df.iloc[sbox-(i+1)]['Close']-df.iloc[sbox-(i+1)]['Open']))*3<= (df.iloc[sbox-(i+1)]['High']-df.iloc[sbox-(i+1)]['Open']) and  (abs(df.iloc[sbox-(i+1)]['Close']-df.iloc[sbox-(i+1)]['Open']))*3<= (df.iloc[sbox-(i+1)]['Close']-df.iloc[sbox-(i+1)]['Low'])):
+                                    
+                                        print("yesssssssss! second Pattern")
+                        else:
+                            break#попалась красная свеча
+                    
+                    
+    
+                    
+             
 
     # # Оповещения для бычьих блоков
+    #вхождение в одинарный лонгбокс
+    if (len(longBoxes) > 0):
+        for i in range(0, len(longBoxes)):
+            
+             sbox=df.index.get_loc(longBoxes[i]['prod'])
+             
+             top = df.iloc[sbox]['High']
+             
+             bot = df.iloc[sbox]['Low']
+             
+             for index in range(sbox, len(df)):
+                low = df.iloc[index]['Low']
+                if (not(low>top)):
+                    print(f"Alert: Price inside Bullish OB at {df.index[index ]}")
+                    #first pattern
+                    if (0.975>=(df.iloc[index]['Close'] - df.iloc[index]['Open'])/(df.iloc[index-1]['High']-df.iloc[index-1]['Close'])>=1.025)   and (df.iloc[index-1]['High']-df.iloc[index-1]['Close'])!=0:#Последняя свеча поглощает вторую
+                        if (df.iloc[index-1]['High'] - df.iloc[index-1]['Open'])/(df.iloc[index-1]['Open'] - df.iloc[index-1]['Close'])>=3   and (df.iloc[index-1]['Open'] - df.iloc[index-1]['Close'])!=0: #Проверка второй свечи на то что она пинбар
+                            if index>2 and (0.975>=(df.iloc[index-2]['Close']-df.iloc[index-2]['Low'])/ (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>=1.025)  and (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
+                                print("yesssssssss! first Pattern")
+                    #third pattern
+                    coin = 0
+                    for i in range(1,7):
+                        if (df.iloc[index]['Volume']>(df.iloc[index-i]['Volume']*4)):
+                            coin+=1
+                    if coin > 3:
+                        print("yesssssssss! third Pattern")
+                    #fourth pattern 
+                    for i in range(0,20):
+                        k_coin=0
+                        ArcTop =0
+                        if (df.iloc[index-i]['Close']<df.iloc[index-(i+1)]['Close']):
+                            k_coin+=1
+                        if (df.iloc[index-i]['Close']>df.iloc[index-(i+1)]['Close']) and (k_coin==i or ArcTop==1):
+                            if k_coin==i:
+                                    ArcTop=1
+                            if  (not(df.iloc[index-(i+1)]['Low']>top)):
+                                print("yesssssssss! fourth Pattern")
+                        else: break
+
+    #вхождение в Двойной лонгбокс
     if (len(longBoxes) > 1):
         for i in range(0, len(longBoxes)-1):
              """print("longBoxes(i)")
@@ -325,11 +442,43 @@ def getAlert(df, tf, OBMitigationType, sens):
                 low = df.iloc[index]['Low']
                 if (not(low>top) and not(low >prev_top) and ((bot - prev_top)<0 or (prev_bot - top)<0)):
                     print(f"Alert: Price inside Double Bullish OB at {df.index[index ]}")
+                    #first pattern
                     if (0.975>=(df.iloc[index]['Close'] - df.iloc[index]['Open'])/(df.iloc[index-1]['High']-df.iloc[index-1]['Close'])>=1.025)   and (df.iloc[index-1]['High']-df.iloc[index-1]['Close'])!=0:#Последняя свеча поглощает вторую
                         if (df.iloc[index-1]['High'] - df.iloc[index-1]['Open'])/(df.iloc[index-1]['Open'] - df.iloc[index-1]['Close'])>=3   and (df.iloc[index-1]['Open'] - df.iloc[index-1]['Close'])!=0: #Проверка второй свечи на то что она пинбар
                             if index>2 and (0.975>=(df.iloc[index-2]['Close']-df.iloc[index-2]['Low'])/ (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>=1.025)  and (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
-                                print("yesssssssss!")
-
+                                print("yesssssssss! first Pattern")
+                    #third pattern
+                    coin = 0
+                    for i in range(1,7):
+                        if (df.iloc[index]['Volume']>(df.iloc[index-i]['Volume']*4)):
+                            coin+=1
+                    if coin > 3:
+                        print("yesssssssss! third Pattern")
+                #second pattern
+                if (not(low>top)):
+                    # если в открытый ордерблок попала свеча 
+                    for i in range(1,10):
+                        # если все свечи красные
+                        if((df.iloc[sbox-i]['Open']-df.iloc[sbox-i]['Close'])>0):
+                            k_coin=0
+                            trigger = 0
+                            for k in range(i-1, 0, -1):
+                                # если они прячутся в тени большой свечи
+                                if(df.iloc[sbox-i]['High']>=df.iloc[sbox-k]['High']):
+                                    k_coin+=1
+                                    if (not(df.iloc[sbox-k]['Low'] < prev_top) ):
+                                        trigger = 1
+                                
+                                #если все свечи были зеленые и нашлась такая что смогла спрятать все предыдущие зеленые свечи и у этих свечей была индикация
+                                if(k_coin==(i-1)) and trigger == 1:
+                                    #то проверяю на пулбэк
+                                    if ((abs(df.iloc[sbox-(i+1)]['Open']-df.iloc[sbox-(i+1)]['Close']))*3<= (df.iloc[sbox-(i+1)]['High']-df.iloc[sbox-(i+1)]['Open']) and  (abs(df.iloc[sbox-(i+1)]['Open']-df.iloc[sbox-(i+1)]['Close']))*3<= (df.iloc[sbox-(i+1)]['Close']-df.iloc[sbox-(i+1)]['Low'])):
+                                    
+                                        print("yesssssssss! second Pattern")
+                        else:
+                            break#попалась зеленая свеча
+    
+                    
 
 
                     
