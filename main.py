@@ -2,7 +2,8 @@ import requests
 import pandas as pd
 import numpy as np
 import copy
-
+import time
+import json
 
 def merge_dataframes(df1, df2):
     # Преобразование индексов в тип datetime, если они не являются таковыми
@@ -265,11 +266,12 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                 #print("yesssssssss! first Pattern")
                                 url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
                                 data = {
-                                    "trading_pair": symble,
-                                    "type_of_candle": candle,
+                                    "trading_pair": str(symble),
+                                    "type_of_candle": str(candle),
                                     "entry_type": "short",
-                                    "timeframe": tf
+                                    "timeframe": str(tf)
                                     }
+                                data = json.dumps(data)
                                 headers = {
                                     'Content-Type': 'application/json'
                                 } 
@@ -284,11 +286,12 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             print("yesssssssss! third Pattern")
                             url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
                             data = {
-                                    "trading_pair": symble,
-                                    "type_of_candle": candle,
+                                   "trading_pair": str(symble),
+                                    "type_of_candle": str(candle),
                                     "entry_type": "short",
-                                    "timeframe": tf
+                                    "timeframe": str(tf)
                                     }
+                            data = json.dumps(data)
                             headers = {
                                     'Content-Type': 'application/json'
                                 } 
@@ -306,11 +309,12 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                 print("yesssssssss! fourth Pattern")
                                 url = "http://94.228.123.228:5000/api/v1/pullback-pattern"
                                 data = {
-                                        "trading_pair": symble,
-                                        "type_of_candle": candle,
+                                        "trading_pair": str(symble),
+                                        "type_of_candle": str(candle),
                                         "entry_type": "short",
-                                        "timeframe": tf
+                                        "timeframe": str(tf)
                                         }
+                                data = json.dumps(data)
                                 headers = {
                                         'Content-Type': 'application/json'
                                     } 
@@ -339,11 +343,12 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                 print("yesssssssss! first Pattern")
                                 url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
                                 data = {
-                                    "trading_pair": symble,
-                                    "type_of_candle": candle,
+                                    "trading_pair": str(symble),
+                                    "type_of_candle": str(candle),
                                     "entry_type": "shortDouble",
-                                    "timeframe": tf
+                                    "timeframe": str(tf)
                                     }
+                                data = json.dumps(data)
                                 headers = {
                                     'Content-Type': 'application/json'
                                 } 
@@ -358,15 +363,17 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             print("yesssssssss! third Pattern")
                             url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
                             data = {
-                                    "trading_pair": symble,
-                                    "type_of_candle": candle,
+                                    "trading_pair": str(symble),
+                                    "type_of_candle": str(candle),
                                     "entry_type": "shortDouble",
-                                    "timeframe": tf
+                                    "timeframe": str(tf)
                                     }
+                            data = json.dumps(data)
                             headers = {
                                     'Content-Type': 'application/json'
                                 } 
                             requests.post(url=url, data=data, headers=headers)
+                            
                 #second pattern
                 if (not(high < bot) ) and candle=='HeikinAshi':
                     # если в открытый ордерблок попала свеча 
@@ -390,11 +397,12 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                         print("yesssssssss! second Pattern")
                                         url = "http://94.228.123.228:5000/api/v1/breakaway-gap-pattern"
                                         data = {
-                                                "trading_pair": symble,
-                                                "type_of_candle": candle,
+                                                "trading_pair": str(symble),
+                                                "type_of_candle": str(candle),
                                                 "entry_type": "shortDouble",
-                                                "timeframe": tf
+                                                "timeframe": str(tf)
                                                 }
+                                        data = json.dumps(data)
                                         headers = {
                                                 'Content-Type': 'application/json'
                                             } 
@@ -429,11 +437,12 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                 #print("yesssssssss! first Pattern")
                                 url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
                                 data = {
-                                    "trading_pair": symble,
-                                    "type_of_candle": candle,
+                                    "trading_pair": str(symble),
+                                    "type_of_candle": str(candle),
                                     "entry_type": "long",
-                                    "timeframe": tf
+                                    "timeframe": str(tf)
                                     }
+                                data = json.dumps(data)
                                 headers = {
                                     'Content-Type': 'application/json'
                                 } 
@@ -448,11 +457,12 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             print("yesssssssss! third Pattern")
                             url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
                             data = {
-                                "trading_pair": symble,
-                                "type_of_candle": candle,
+                                "trading_pair": str(symble),
+                                "type_of_candle": str(candle),
                                 "entry_type": "long",
-                                "timeframe": tf
+                                "timeframe": str(tf)
                                 }
+                            data = json.dumps(data)
                             headers = {
                                 'Content-Type': 'application/json'
                             } 
@@ -472,11 +482,12 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                 print("yesssssssss! fourth Pattern")
                                 url = "http://94.228.123.228:5000/api/v1/pullback-pattern"
                                 data = {
-                                    "trading_pair": symble,
-                                    "type_of_candle": candle,
+                                    "trading_pair": str(symble),
+                                    "type_of_candle": str(candle),
                                     "entry_type": "long",
-                                    "timeframe": tf
+                                    "timeframe": str(tf)
                                     }
+                                data = json.dumps(data)
                                 headers = {
                                     'Content-Type': 'application/json'
                                 } 
@@ -507,11 +518,12 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                 print("yesssssssss! first Pattern")
                                 url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
                                 data = {
-                                    "trading_pair": symble,
-                                    "type_of_candle": candle,
+                                    "trading_pair": str(symble),
+                                    "type_of_candle": str(candle),
                                     "entry_type": "longDouble",
-                                    "timeframe": tf
+                                    "timeframe": str(tf)
                                     }
+                                data = json.dumps(data)
                                 headers = {
                                     'Content-Type': 'application/json'
                                 } 
@@ -526,11 +538,12 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             print("yesssssssss! third Pattern")
                             url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
                             data = {
-                                "trading_pair": symble,
-                                "type_of_candle": candle,
+                                "trading_pair": str(symble),
+                                "type_of_candle": str(candle),
                                 "entry_type": "longDouble",
-                                "timeframe": tf
+                                "timeframe": str(tf)
                                 }
+                            data = json.dumps(data)
                             headers = {
                                 'Content-Type': 'application/json'
                             } 
@@ -558,11 +571,12 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                         print("yesssssssss! second Pattern")
                                         url = "http://94.228.123.228:5000/api/v1/breakaway-gap-pattern"
                                         data = {
-                                            "trading_pair": symble,
-                                            "type_of_candle": candle,
+                                            "trading_pair": str(symble),
+                                            "type_of_candle": str(candle),
                                             "entry_type": "longDouble",
-                                            "timeframe": tf
+                                            "timeframe": str(tf)
                                             }
+                                        data = json.dumps(data)
                                         headers = {
                                             'Content-Type': 'application/json'
                                         } 
@@ -730,15 +744,17 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
                                         print("yesssssssss! fifth Pattern")
                                         url = "http://94.228.123.228:5000/api/v1/fifth-pattern"
                                         data = {
-                                            "trading_pair": symble,
-                                            "type_of_candle": candle,
+                                            "trading_pair": str(symble),
+                                            "type_of_candle": str(candle),
                                             "entry_type": "short",
-                                            "timeframe": tf
+                                            "timeframe": str(tf)
                                             }
+                                        data = json.dumps(data)
                                         headers = {
                                             'Content-Type': 'application/json'
                                         } 
                                         requests.post(url=url, data=data, headers=headers)
+                                        
                    
     # # Оповещения для бычьих блоков
     #вхождение в одинарный лонгбокс
@@ -764,15 +780,17 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
                                         print("yesssssssss! fifth Pattern")
                                         url = "http://94.228.123.228:5000/api/v1/fifth-pattern"
                                         data = {
-                                            "trading_pair": symble,
-                                            "type_of_candle": candle,
+                                            "trading_pair": str(symble),
+                                            "type_of_candle": str(candle),
                                             "entry_type": "long",
-                                            "timeframe": tf
+                                            "timeframe": str(tf)
                                             }
+                                        data = json.dumps(data)
                                         headers = {
                                             'Content-Type': 'application/json'
                                         } 
                                         requests.post(url=url, data=data, headers=headers)
+                                      
 
     df.to_csv('output11.csv')
     return df
@@ -788,15 +806,19 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
 
 
 
+while True:
+    try:
+        df = getCandles('BTCUSDT', '30',300)
 
+        print(getAlert(df, '30min', 'Close', 28, 'Candles', 'BTCUSDT'))
+        dft = getCandlesHeikenAshi('BTCUSDT', '30',300)
+        dft2 = copy.deepcopy(dft)
+        print(getAlert(dft2, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
+        print(getAlert5pattern(dft, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
+        time.sleep(1800)
+    except Exception :
+        print("blyat")
 
-df = getCandles('BTCUSDT', '30',300)
-
-print(getAlert(df, '30min', 'Close', 28, 'Candles', 'BTCUSDT'))
-dft = getCandlesHeikenAshi('BTCUSDT', '30',300)
-dft2 = copy.deepcopy(dft)
-print(getAlert(dft2, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
-print(getAlert5pattern(dft, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
 #for index, row in df.iterrows():
     #ob_created_bear = False
     #ob_created_bull = False
