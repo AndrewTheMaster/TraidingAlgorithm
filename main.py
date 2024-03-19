@@ -1,8 +1,9 @@
 import requests
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as pl
-import csv
+import copy
+
+
 def merge_dataframes(df1, df2):
     # Преобразование индексов в тип datetime, если они не являются таковыми
     #df1.index = pd.to_datetime(df1.index)
@@ -13,7 +14,7 @@ def merge_dataframes(df1, df2):
     merged_df = pd.concat([df1, df2], axis=1, join='outer')
     
     # Замена значений из второго фрейма в соответствующих ячейках
-    print(merged_df)
+
     for index, row in df2.iterrows():
         date_value = row['Date_y']  # Значение даты из второго DataFrame
         corresponding_row = df1[df1['Date'] == date_value]  # Находим соответствующую строку в первом DataFrame по значению даты из второго DataFrame
@@ -24,7 +25,7 @@ def merge_dataframes(df1, df2):
                     merged_df.at[corresponding_row.index[0], original_column] = row[column]  # Присваиваем значение из второго DataFrame в ячейку первого DataFrame
 
 
-    print(merged_df)
+    
 
     # Выбор столбцов, заканчивающихся на '_y'
     columns_to_drop = merged_df.filter(like='_y').columns
@@ -65,17 +66,16 @@ def getCandlesHeikenAshi(symb, tf, limit):
     params = {'category': 'spot', 'symbol': symb, 'interval': tf, 'limit': limit}
     r = requests.get(URL, params=params)
     df = pd.DataFrame(r.json()['result']['list'])
-    print("data")
-    print(df)
+
     file_path = "CandlesHeikenAshi.csv"
 
     with open(file_path, 'r', newline='', encoding='utf-8') as file:
         CSVdf = pd.read_csv(file_path, encoding='utf-8')
-        print("last_row")
+      
         last_row = CSVdf.tail(1)
-        print(last_row)
+       
         #print(last_row.loc[291, 'Open'])
-        print("last_row")
+        
 
         # Преобразование в хайкен-аши
         m = pd.DataFrame()
@@ -90,43 +90,28 @@ def getCandlesHeikenAshi(symb, tf, limit):
 
         # Найдем дату в DataFrame m, соответствующую дате в последней строке CSVdf
         start_date = last_row['Date'].iloc[0]
-        print(start_date)
+     
 
         important_index =  last_row.index
-        print("important_index")
-        print(important_index)
-        print("important_index")
-        print(m.columns)
+       
         start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-        print(start_index)
+        
         # Начинаем с найденного индекса в DataFrame m
         for index, row in m.iloc[limit-start_index:].iterrows():
             # ваш код обработки каждой строки
-            print(index)
+           
             if index+1 == start_index:
                 m.loc[index, 'Open'] = (last_row['Open'].iloc[0] + last_row['Close'].iloc[0]) / 2.0
 
-                print((last_row['Open'].iloc[0] + last_row['Close'].iloc[0]) / 2.0)
+                
             else:
                 m.loc[index, 'Open'] = (m.loc[index + 1, 'Open'] + m.loc[index + 1, 'Close']) / 2.0
-
-            print(m.loc[index, 'Open'])
+         
         m['High'] = m.iloc[:, 1:5].max(axis=1)
         m['Low'] = m.iloc[:, 1:5].min(axis=1)
         CSVdf['Date'] = pd.to_datetime(CSVdf['Date'])
-        print("m")
-        print(m)
-        print("CSVdf")
-        print(CSVdf)
-
 
         m = merge_dataframes(m, CSVdf)
-        print("merged_m")
-        print(m)
- 
-    
-
-        
 
         #m_without_last_row = m.iloc[:-1]  # Исключаем последнюю строку
         m_without_last_row = m
@@ -136,14 +121,9 @@ def getCandlesHeikenAshi(symb, tf, limit):
 
 
     return  m_without_last_row
-
-    
-    
-
-
  
    
-def getAlert(df, tf, OBMitigationType, sens):
+def getAlert(df, tf, OBMitigationType, sens, candle, symble):
     df['Date'] = pd.to_datetime(df['Date'])
     df.set_index('Date', inplace=True)  # Устанавливаем индекс в формате DatetimeIndex
     df.index.freq = tf  # Установка частоты в минутах
@@ -261,17 +241,10 @@ def getAlert(df, tf, OBMitigationType, sens):
 
 
     shortBoxes = newShortBoxes
-
-
-   
-    print("shortboxes")
-    print(shortBoxes)
-    print("longboxes")
-    print(longBoxes)
-
-   
     # # Оповещения для медвежьих блоков
     #вхождение в одинарный шортбокс
+    print(shortBoxes)
+    print(longBoxes)
     if (len(shortBoxes)>0):
          for i in range(0, len(shortBoxes)):
           
@@ -286,36 +259,67 @@ def getAlert(df, tf, OBMitigationType, sens):
                 if (not(high < bot) ):
                     print(f"Alert: Price inside Bearish OB at {df.index[index ]} ")
                     #first pattern
-                    if (0.975>=(df.iloc[index]['Open'] - df.iloc[index]['Close'])/(df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])>=1.025)   and (df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])!=0:#Последняя свеча поглощает вторую
+                    if candle == 'Candles' and (0.975>=(df.iloc[index]['Open'] - df.iloc[index]['Close'])/(df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])>=1.025)   and (df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])!=0:#Последняя свеча поглощает вторую
                         if (df.iloc[index-1]['Open'] - df.iloc[index-1]['Low'])/(df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])>=3   and (df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])!=0: #Проверка второй свечи на то что она пинбар
                             if index>2 and (0.975>=(df.iloc[index-2]['High']-df.iloc[index-2]['Close'])/ (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>=1.025)  and (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
-                                print("yesssssssss! first Pattern")
+                                #print("yesssssssss! first Pattern")
+                                url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
+                                data = {
+                                    "trading_pair": symble,
+                                    "type_of_candle": candle,
+                                    "entry_type": "short",
+                                    "timeframe": tf
+                                    }
+                                headers = {
+                                    'Content-Type': 'application/json'
+                                } 
+                                requests.post(url=url, data=data, headers=headers)
                     #third pattern
-                    coin = 0
-                    for i in range(1,7):
-                        if (df.iloc[index]['Volume']>(df.iloc[index-i]['Volume']*4)):
-                            coin+=1
-                    if coin > 3:
-                        print("yesssssssss! third Pattern")
+                    if candle=='Candle':
+                        coin = 0
+                        for ii in range(1,7):
+                            if (df.iloc[index]['Volume']>(df.iloc[index-ii]['Volume']*4)):
+                                coin+=1
+                        if coin > 3:
+                            print("yesssssssss! third Pattern")
+                            url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
+                            data = {
+                                    "trading_pair": symble,
+                                    "type_of_candle": candle,
+                                    "entry_type": "short",
+                                    "timeframe": tf
+                                    }
+                            headers = {
+                                    'Content-Type': 'application/json'
+                                } 
+                            requests.post(url=url, data=data, headers=headers)
                     #fourth pattern 
-                    for i in range(0,20):
+                    for iii in range(0,20):
                         k_coin=0
                         ArcTop =0
-                        if (df.iloc[index-i]['High']>df.iloc[index-(i+1)]['High']):
+                        if (df.iloc[index-iii]['High']>df.iloc[index-(iii+1)]['High']):
                             k_coin+=1
-                        if (df.iloc[index-i]['High']<df.iloc[index-(i+1)]['High']) and (k_coin==i or ArcTop==1):
-                            if k_coin==i:
+                        if (df.iloc[index-iii]['High']<df.iloc[index-(iii+1)]['High']) and (k_coin==i or ArcTop==1):
+                            if k_coin==iii:
                                     ArcTop=1
-                            if  (not(df.iloc[index-(i+1)]['High']<bot)):
+                            if  (not(df.iloc[index-(iii+1)]['High']<bot)):
                                 print("yesssssssss! fourth Pattern")
+                                url = "http://94.228.123.228:5000/api/v1/pullback-pattern"
+                                data = {
+                                        "trading_pair": symble,
+                                        "type_of_candle": candle,
+                                        "entry_type": "short",
+                                        "timeframe": tf
+                                        }
+                                headers = {
+                                        'Content-Type': 'application/json'
+                                    } 
+                                requests.post(url=url, data=data, headers=headers)
                         else: break
     #вхождение в двойной шортбокс
     if (len(shortBoxes)>1):
          for i in range(0, len(shortBoxes)-1):
-             """print("shortBoxes(i)")
-             print(shortBoxes[i]['prod'])
-             print("shortBoxes(i+1)")
-             print(shortBoxes[i+1]['prod'])"""
+        
              sbox=df.index.get_loc(shortBoxes[i]['prod'])
              prev_sbox=df.index.get_loc(shortBoxes[i+1]['prod'])
              top = df.iloc[sbox]['High']
@@ -323,52 +327,78 @@ def getAlert(df, tf, OBMitigationType, sens):
              bot = df.iloc[sbox]['Low']
              prev_bot = df.iloc[prev_sbox]['Low']
 
-             """print("top")
-             print(top)
-             print("prev_top")
-             print(prev_top)
-             print("bot")
-             print(bot)
-             print("prev_bot")
-             print(prev_bot)"""
              for index in range(prev_sbox, len(df)):
                 high = df.iloc[index]['High']
                 
                 if (not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0)):
                     print(f"Alert: Price inside Double Bearish OB at {df.index[index ]}")
                     #first pattern
-                    if (0.975>=(df.iloc[index]['Open'] - df.iloc[index]['Close'])/(df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])>=1.025)   and (df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])!=0:#Последняя свеча поглощает вторую
+                    if candle=='Candle' and (0.975>=(df.iloc[index]['Open'] - df.iloc[index]['Close'])/(df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])>=1.025)   and (df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])!=0:#Последняя свеча поглощает вторую
                         if (df.iloc[index-1]['Open'] - df.iloc[index-1]['Low'])/(df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])>=3   and (df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])!=0: #Проверка второй свечи на то что она пинбар
                             if index>2 and (0.975>=(df.iloc[index-2]['High']-df.iloc[index-2]['Close'])/ (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>=1.025)  and (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
                                 print("yesssssssss! first Pattern")
+                                url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
+                                data = {
+                                    "trading_pair": symble,
+                                    "type_of_candle": candle,
+                                    "entry_type": "shortDouble",
+                                    "timeframe": tf
+                                    }
+                                headers = {
+                                    'Content-Type': 'application/json'
+                                } 
+                                requests.post(url=url, data=data, headers=headers)
                     #third pattern
-                    coin = 0
-                    for i in range(1,7):
-                        if (df.iloc[index]['Volume']>(df.iloc[index-i]['Volume']*4)):
-                            coin+=1
-                    if coin > 3:
-                        print("yesssssssss! third Pattern")
+                    if candle=='Candle':
+                        coin = 0
+                        for ii in range(1,7):
+                            if (df.iloc[index]['Volume']>(df.iloc[index-ii]['Volume']*4)):
+                                coin+=1
+                        if coin > 3:
+                            print("yesssssssss! third Pattern")
+                            url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
+                            data = {
+                                    "trading_pair": symble,
+                                    "type_of_candle": candle,
+                                    "entry_type": "shortDouble",
+                                    "timeframe": tf
+                                    }
+                            headers = {
+                                    'Content-Type': 'application/json'
+                                } 
+                            requests.post(url=url, data=data, headers=headers)
                 #second pattern
-                if (not(high < bot) ):
+                if (not(high < bot) ) and candle=='HeikinAshi':
                     # если в открытый ордерблок попала свеча 
-                    for i in range(1,10):
+                    for iii in range(1,10):
                         # если все свечи зеленые
-                        if((df.iloc[sbox-i]['Open']-df.iloc[sbox-i]['Close'])<0):
+                        if((df.iloc[sbox-iii]['Open']-df.iloc[sbox-iii]['Close'])<0):
                             k_coin=0
                             trigger = 0
-                            for k in range(i-1, 0, -1):
+                            for k in range(iii-1, 0, -1):
                                 # если они прячутся в тени большой свечи
-                                if(df.iloc[sbox-i]['High']<=df.iloc[sbox-k]['High']):
+                                if(df.iloc[sbox-iii]['High']>df.iloc[sbox-k]['High']) and (df.iloc[sbox-iii]['Low']<df.iloc[sbox-k]['Low']):
                                     k_coin+=1
                                     if (not(df.iloc[sbox-k]['High'] < prev_bot) ):
                                         trigger = 1
                                 
                                 #если все свечи были зеленые и нашлась такая что смогла спрятать все предыдущие зеленые свечи и у этих свечей была индикация
-                                if(k_coin==(i-1)) and trigger == 1:
+                                if(k_coin==(iii-1)) and trigger == 1:
                                     #то проверяю на пулбэк
-                                    if (abs((df.iloc[sbox-(i+1)]['Close']-df.iloc[sbox-(i+1)]['Open']))*3<= (df.iloc[sbox-(i+1)]['High']-df.iloc[sbox-(i+1)]['Open']) and  (abs(df.iloc[sbox-(i+1)]['Close']-df.iloc[sbox-(i+1)]['Open']))*3<= (df.iloc[sbox-(i+1)]['Close']-df.iloc[sbox-(i+1)]['Low'])):
+                                    if (abs((df.iloc[sbox-(iii+1)]['Close']-df.iloc[sbox-(iii+1)]['Open']))*3<= (df.iloc[sbox-(iii+1)]['High']-df.iloc[sbox-(iii+1)]['Open']) and  (abs(df.iloc[sbox-(iii+1)]['Close']-df.iloc[sbox-(iii+1)]['Open']))*3<= (df.iloc[sbox-(iii+1)]['Close']-df.iloc[sbox-(iii+1)]['Low'])):
                                     
                                         print("yesssssssss! second Pattern")
+                                        url = "http://94.228.123.228:5000/api/v1/breakaway-gap-pattern"
+                                        data = {
+                                                "trading_pair": symble,
+                                                "type_of_candle": candle,
+                                                "entry_type": "shortDouble",
+                                                "timeframe": tf
+                                                }
+                                        headers = {
+                                                'Content-Type': 'application/json'
+                                            } 
+                                        requests.post(url=url, data=data, headers=headers)
                         else:
                             break#попалась красная свеча
                     
@@ -393,106 +423,380 @@ def getAlert(df, tf, OBMitigationType, sens):
                 if (not(low>top)):
                     print(f"Alert: Price inside Bullish OB at {df.index[index ]}")
                     #first pattern
-                    if (0.975>=(df.iloc[index]['Close'] - df.iloc[index]['Open'])/(df.iloc[index-1]['High']-df.iloc[index-1]['Close'])>=1.025)   and (df.iloc[index-1]['High']-df.iloc[index-1]['Close'])!=0:#Последняя свеча поглощает вторую
+                    if candle== 'Candle' and (0.975>=(df.iloc[index]['Close'] - df.iloc[index]['Open'])/(df.iloc[index-1]['High']-df.iloc[index-1]['Close'])>=1.025)   and (df.iloc[index-1]['High']-df.iloc[index-1]['Close'])!=0:#Последняя свеча поглощает вторую
                         if (df.iloc[index-1]['High'] - df.iloc[index-1]['Open'])/(df.iloc[index-1]['Open'] - df.iloc[index-1]['Close'])>=3   and (df.iloc[index-1]['Open'] - df.iloc[index-1]['Close'])!=0: #Проверка второй свечи на то что она пинбар
                             if index>2 and (0.975>=(df.iloc[index-2]['Close']-df.iloc[index-2]['Low'])/ (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>=1.025)  and (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
-                                print("yesssssssss! first Pattern")
+                                #print("yesssssssss! first Pattern")
+                                url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
+                                data = {
+                                    "trading_pair": symble,
+                                    "type_of_candle": candle,
+                                    "entry_type": "long",
+                                    "timeframe": tf
+                                    }
+                                headers = {
+                                    'Content-Type': 'application/json'
+                                } 
+                                requests.post(url=url, data=data, headers=headers)
                     #third pattern
-                    coin = 0
-                    for i in range(1,7):
-                        if (df.iloc[index]['Volume']>(df.iloc[index-i]['Volume']*4)):
-                            coin+=1
-                    if coin > 3:
-                        print("yesssssssss! third Pattern")
+                    if candle== 'Candle':
+                        coin = 0
+                        for ii in range(1,7):
+                            if (df.iloc[index]['Volume']>(df.iloc[index-ii]['Volume']*4)):
+                                coin+=1
+                        if coin > 3:
+                            print("yesssssssss! third Pattern")
+                            url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
+                            data = {
+                                "trading_pair": symble,
+                                "type_of_candle": candle,
+                                "entry_type": "long",
+                                "timeframe": tf
+                                }
+                            headers = {
+                                'Content-Type': 'application/json'
+                            } 
+                            requests.post(url=url, data=data, headers=headers)
                     #fourth pattern 
-                    for i in range(0,20):
+                    for iii in range(0,20):
                         k_coin=0
                         ArcTop =0
-                        if (df.iloc[index-i]['Close']<df.iloc[index-(i+1)]['Close']):
+                        if (df.iloc[index-iii]['Close']<df.iloc[index-(iii+1)]['Close']):
                             k_coin+=1
-                        if (df.iloc[index-i]['Close']>df.iloc[index-(i+1)]['Close']) and (k_coin==i or ArcTop==1):
-                            if k_coin==i:
+                            print(df.iloc[index-(iii+1)]['Close'])
+                        if (df.iloc[index-iii]['Close']>df.iloc[index-(iii+1)]['Close']) and (k_coin==iii or ArcTop==1):
+                            if k_coin==iii:
                                     ArcTop=1
-                            if  (not(df.iloc[index-(i+1)]['Low']>top)):
+                            #print(df.iloc[index-(i+1)]['Close'])
+                            if  (not(df.iloc[index-(iii+1)]['Low']>top)):
                                 print("yesssssssss! fourth Pattern")
+                                url = "http://94.228.123.228:5000/api/v1/pullback-pattern"
+                                data = {
+                                    "trading_pair": symble,
+                                    "type_of_candle": candle,
+                                    "entry_type": "long",
+                                    "timeframe": tf
+                                    }
+                                headers = {
+                                    'Content-Type': 'application/json'
+                                } 
+                                requests.post(url=url, data=data, headers=headers)
                         else: break
+                        k_coin=0
+                        ArcTop =0
 
     #вхождение в Двойной лонгбокс
     if (len(longBoxes) > 1):
         for i in range(0, len(longBoxes)-1):
-             """print("longBoxes(i)")
-             print(longBoxes[i]['prod'])
-             print("longBoxes(i+1)")
-             print(longBoxes[i+1]['prod'])"""
+         
              sbox=df.index.get_loc(longBoxes[i]['prod'])
              prev_sbox=df.index.get_loc(longBoxes[i+1]['prod'])
              top = df.iloc[sbox]['High']
              prev_top = df.iloc[prev_sbox]['High']
              bot = df.iloc[sbox]['Low']
              prev_bot = df.iloc[prev_sbox]['Low']
-             """print("top")
-             print(top)
-             print("prev_top")
-             print(prev_top)
-             print("bot")
-             print(bot)
-             print("prev_bot")
-             print(prev_bot)"""
+      
              for index in range(prev_sbox, len(df)):
                 low = df.iloc[index]['Low']
                 if (not(low>top) and not(low >prev_top) and ((bot - prev_top)<0 or (prev_bot - top)<0)):
                     print(f"Alert: Price inside Double Bullish OB at {df.index[index ]}")
                     #first pattern
-                    if (0.975>=(df.iloc[index]['Close'] - df.iloc[index]['Open'])/(df.iloc[index-1]['High']-df.iloc[index-1]['Close'])>=1.025)   and (df.iloc[index-1]['High']-df.iloc[index-1]['Close'])!=0:#Последняя свеча поглощает вторую
+                    if  candle== 'Candle'and (0.975>=(df.iloc[index]['Close'] - df.iloc[index]['Open'])/(df.iloc[index-1]['High']-df.iloc[index-1]['Close'])>=1.025)   and (df.iloc[index-1]['High']-df.iloc[index-1]['Close'])!=0:#Последняя свеча поглощает вторую
                         if (df.iloc[index-1]['High'] - df.iloc[index-1]['Open'])/(df.iloc[index-1]['Open'] - df.iloc[index-1]['Close'])>=3   and (df.iloc[index-1]['Open'] - df.iloc[index-1]['Close'])!=0: #Проверка второй свечи на то что она пинбар
                             if index>2 and (0.975>=(df.iloc[index-2]['Close']-df.iloc[index-2]['Low'])/ (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>=1.025)  and (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
                                 print("yesssssssss! first Pattern")
+                                url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
+                                data = {
+                                    "trading_pair": symble,
+                                    "type_of_candle": candle,
+                                    "entry_type": "longDouble",
+                                    "timeframe": tf
+                                    }
+                                headers = {
+                                    'Content-Type': 'application/json'
+                                } 
+                                requests.post(url=url, data=data, headers=headers)
                     #third pattern
-                    coin = 0
-                    for i in range(1,7):
-                        if (df.iloc[index]['Volume']>(df.iloc[index-i]['Volume']*4)):
-                            coin+=1
-                    if coin > 3:
-                        print("yesssssssss! third Pattern")
+                    if candle== 'Candle':
+                        coin = 0
+                        for k in range(1,7):
+                            if (df.iloc[index]['Volume']>(df.iloc[index-k]['Volume']*4)):
+                                coin+=1
+                        if coin > 3:
+                            print("yesssssssss! third Pattern")
+                            url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
+                            data = {
+                                "trading_pair": symble,
+                                "type_of_candle": candle,
+                                "entry_type": "longDouble",
+                                "timeframe": tf
+                                }
+                            headers = {
+                                'Content-Type': 'application/json'
+                            } 
+                            requests.post(url=url, data=data, headers=headers)
                 #second pattern
-                if (not(low>top)):
+                if (not(low>top)) and candle=='HeikinAshi':
                     # если в открытый ордерблок попала свеча 
-                    for i in range(1,10):
+                    for ii in range(1,10):
                         # если все свечи красные
-                        if((df.iloc[sbox-i]['Open']-df.iloc[sbox-i]['Close'])>0):
+                        if((df.iloc[sbox-ii]['Open']-df.iloc[sbox-ii]['Close'])>0):
                             k_coin=0
                             trigger = 0
-                            for k in range(i-1, 0, -1):
+                            for kk in range(ii-1, 0, -1):
                                 # если они прячутся в тени большой свечи
-                                if(df.iloc[sbox-i]['High']>=df.iloc[sbox-k]['High']):
+                                if(df.iloc[sbox-ii]['High']>df.iloc[sbox-kk]['High'] and (df.iloc[sbox-ii]['Low']<df.iloc[sbox-kk]['Low'])):
                                     k_coin+=1
-                                    if (not(df.iloc[sbox-k]['Low'] < prev_top) ):
+                                    if (not(df.iloc[sbox-kk]['Low'] < prev_top) ):
                                         trigger = 1
                                 
                                 #если все свечи были зеленые и нашлась такая что смогла спрятать все предыдущие зеленые свечи и у этих свечей была индикация
-                                if(k_coin==(i-1)) and trigger == 1:
+                                if(k_coin==(ii-1)) and trigger == 1:
                                     #то проверяю на пулбэк
-                                    if ((abs(df.iloc[sbox-(i+1)]['Open']-df.iloc[sbox-(i+1)]['Close']))*3<= (df.iloc[sbox-(i+1)]['High']-df.iloc[sbox-(i+1)]['Open']) and  (abs(df.iloc[sbox-(i+1)]['Open']-df.iloc[sbox-(i+1)]['Close']))*3<= (df.iloc[sbox-(i+1)]['Close']-df.iloc[sbox-(i+1)]['Low'])):
+                                    if ((abs(df.iloc[sbox-(ii+1)]['Open']-df.iloc[sbox-(ii+1)]['Close']))*3<= (df.iloc[sbox-(ii+1)]['High']-df.iloc[sbox-(ii+1)]['Open']) and  (abs(df.iloc[sbox-(ii+1)]['Open']-df.iloc[sbox-(ii+1)]['Close']))*3<= (df.iloc[sbox-(ii+1)]['Close']-df.iloc[sbox-(ii+1)]['Low'])):
                                     
                                         print("yesssssssss! second Pattern")
+                                        url = "http://94.228.123.228:5000/api/v1/breakaway-gap-pattern"
+                                        data = {
+                                            "trading_pair": symble,
+                                            "type_of_candle": candle,
+                                            "entry_type": "longDouble",
+                                            "timeframe": tf
+                                            }
+                                        headers = {
+                                            'Content-Type': 'application/json'
+                                        } 
+                                        requests.post(url=url, data=data, headers=headers)
                         else:
                             break#попалась зеленая свеча
     
-                    
-
-
-                    
-
+    
 
     df.to_csv('output111.csv')
     return df
+
+
+
+
+
+
+
+
+
+
+
+
+
+def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
+    df['Date'] = pd.to_datetime(df['Date'])
+    df.set_index('Date', inplace=True)  # Устанавливаем индекс в формате DatetimeIndex
+    df.index.freq = tf  # Установка частоты в минутах
+    # Initialize variables
+
+    shortBoxes = []
+    longBoxes = []
+    # Параметры для создания блоков заявок
+    
+    sens /= 100
+
+
+    # Создание блоков заявок
+    df['pc'] = (df['Open'] - df['Open'].shift(4)) / df['Open'].shift(4) * 100
+    #print(df['pc'])
+
+    df['ob_created'] = (df['pc'] < -sens) & (df['pc'].shift(1) >= -sens)
+    df['ob_created_bull'] = (df['pc'] > sens) & (df['pc'].shift(1) <= sens)
+
+    # Создайте столбец last_cross_index с начальными значениями None
+    df['last_cross_index'] = None
+    #df['last_cross_index_bull'] = None
+
+    # Используйте векторизованные операции для установки значений в столбец
+    condition1 = (df['ob_created']).values
+    df.loc[condition1, 'last_cross_index'] = 0
+    condition2 = (df['ob_created_bull']).values
+    df.loc[condition2, 'last_cross_index'] = 0
+
+
+    df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
+    df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
+    df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
+    df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
+
+    ob_created_df = df[df['ob_created'] & df['last_cross_index'].shift(1).isnull()]
+    ob_created_bull_df = df[df['ob_created_bull'] & df['last_cross_index'].shift(1).isnull()]
+    #print(ob_created_df)
+    #print(ob_created_bull_df)
+
+    bearish_dates = ob_created_df.index
+    bullish_dates = ob_created_bull_df.index
+
+    for date in bearish_dates:
+        index_of_date = df.index.get_loc(date)
+        for i in range(4, 16):
+            if 0 <= index_of_date - i < len(df):
+                if (df['Close'].iloc[index_of_date-i] > df['Open'].iloc[index_of_date-i]):
+                    shortBox = {
+                       # 'top': df['High'].iloc[index_of_date + i],
+                        #'bottom': df['Low'].iloc[index_of_date + i],
+                        'orig': df.index[index_of_date],
+                        'prod': df.index[index_of_date -i],
+                        #'date': df['Date'].iloc[index_of_date + i].astype(np.int64)
+                    }
+                    shortBoxes.append(shortBox)
+                    break
+
+    for date in bullish_dates:
+        index_of_date = df.index.get_loc(date)
+        for i in range(4, 16):
+            if 0 <= index_of_date - i < len(df):
+            #print(df['Close'].shift(i).iloc[index_of_date])
+                if (df['Close'].iloc[index_of_date-i] < df['Open'].iloc[index_of_date-i]):
+                    longBox = {
+                        #'top': df['High'].iloc[index_of_date + i],
+                        #'bottom': df['Low'].iloc[index_of_date + i],
+                        'orig': df.index[index_of_date ],
+                        'prod': df.index[index_of_date -i],
+                        #'date': df['Date'].iloc[index_of_date + i].astype(np.int64)
+                    }
+                    longBoxes.append(longBox)
+                    #print("222222222222222222222")
+                    #print(df.shift(i).iloc[last_red])
+
+                    break
+   
+  
+    df['OBBullMitigation'] = np.where(OBMitigationType == 'Close', df['Close'].shift(1), df['Low'])
+    df['OBBearMitigation'] = np.where(OBMitigationType == 'Close', df['Close'].shift(1), df['High'])
+    #shortBoxes['prod'] = pd.to_datetime(shortBoxes['prod'])
+    #condition = (df['OBBearMitigation'] > df['High']) & (df.index.isin(shortBoxes['prod']))
+    #shortBoxes = shortBoxes[~condition]
+    
+    newLongBoxes = []
+
+    for date in longBoxes:
+        start_index = df.index.get_loc(date['prod'])
+        keep_date = True
+
+        for index in range(start_index, len(df)):
+
+            if df.iloc[index]['OBBullMitigation'] < df.iloc[start_index]['Low']:
+                keep_date = False
+                break
+        
+        if keep_date:
+            newLongBoxes.append(date)
+
+    longBoxes = newLongBoxes
+    #print(shortBoxes)
+    newShortBoxes = []
+
+    for date in shortBoxes:
+        start_index = df.index.get_loc(date['prod'])
+        keep_date = True
+
+        for index in range(start_index, len(df)):
+            if df.iloc[index]['OBBearMitigation'] > df.iloc[start_index]['High']:
+                keep_date = False
+                break
+        
+        if keep_date:
+            newShortBoxes.append(date)
+
+
+    shortBoxes = newShortBoxes
+   
+    # # Оповещения для медвежьих блоков
+    #вхождение в одинарный шортбокс
+    if (len(shortBoxes)>0):
+         for i in range(0, len(shortBoxes)):
+          
+             sbox=df.index.get_loc(shortBoxes[i]['prod'])
+             
+             top = df.iloc[sbox]['High']
+         
+             bot = df.iloc[sbox]['Low']
+          
+             for r in range (1,20):
+                k_coin=0
+                for k in range (1,r):
+                     if (df.iloc[sbox-r]['High']>df.iloc[sbox-k]['High']) and (df.iloc[sbox-r]['Low']<df.iloc[sbox-k]['Low']):
+                         k_coin+=1
+                if (r-1)==k_coin:
+                    #нашли большую свечу которая прячет в себе предыдущие свечи
+                    for d in range (1,5):
+                         if ((abs(df.iloc[sbox-(r+d)]['Open']-df.iloc[sbox-(r+d)]['Close']))*3<= (df.iloc[sbox-(r+d)]['High']-df.iloc[sbox-(r+d)]['Open']) and  (abs(df.iloc[sbox-(r+d)]['Open']-df.iloc[sbox-(r+d)]['Close']))*3<= (df.iloc[sbox-(r+d)]['Close']-df.iloc[sbox-(r+d)]['Low'])):
+                                    
+                                        print("yesssssssss! fifth Pattern")
+                                        url = "http://94.228.123.228:5000/api/v1/fifth-pattern"
+                                        data = {
+                                            "trading_pair": symble,
+                                            "type_of_candle": candle,
+                                            "entry_type": "short",
+                                            "timeframe": tf
+                                            }
+                                        headers = {
+                                            'Content-Type': 'application/json'
+                                        } 
+                                        requests.post(url=url, data=data, headers=headers)
+                   
+    # # Оповещения для бычьих блоков
+    #вхождение в одинарный лонгбокс
+    if (len(longBoxes) > 0):
+        for i in range(0, len(longBoxes)):
+            
+             sbox=df.index.get_loc(longBoxes[i]['prod'])
+             
+             top = df.iloc[sbox]['High']
+             
+             bot = df.iloc[sbox]['Low']
+             
+             for r in range (1,20):
+                k_coin=0
+                for k in range (1,r):
+                     if (df.iloc[sbox-r]['High']>df.iloc[sbox-k]['High']) and (df.iloc[sbox-r]['Low']<df.iloc[sbox-k]['Low']):
+                         k_coin+=1
+                if (r-1)==k_coin:
+                    #нашли большую свечу которая прячет в себе предыдущие свечи
+                    for d in range (1,5):
+                         if ((abs(df.iloc[sbox-(r+d)]['Open']-df.iloc[sbox-(r+d)]['Close']))*3<= (df.iloc[sbox-(r+d)]['High']-df.iloc[sbox-(r+d)]['Open']) and  (abs(df.iloc[sbox-(r+d)]['Open']-df.iloc[sbox-(r+d)]['Close']))*3<= (df.iloc[sbox-(r+d)]['Close']-df.iloc[sbox-(r+d)]['Low'])):
+                                    
+                                        print("yesssssssss! fifth Pattern")
+                                        url = "http://94.228.123.228:5000/api/v1/fifth-pattern"
+                                        data = {
+                                            "trading_pair": symble,
+                                            "type_of_candle": candle,
+                                            "entry_type": "long",
+                                            "timeframe": tf
+                                            }
+                                        headers = {
+                                            'Content-Type': 'application/json'
+                                        } 
+                                        requests.post(url=url, data=data, headers=headers)
+
+    df.to_csv('output11.csv')
+    return df
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 df = getCandles('BTCUSDT', '30',300)
-print(df)
-print(getAlert(df, '30min', 'Close', 28))
+
+print(getAlert(df, '30min', 'Close', 28, 'Candles', 'BTCUSDT'))
 dft = getCandlesHeikenAshi('BTCUSDT', '30',300)
-print("CandlesHeikenAshi")
-print(dft)
-print(getAlert(dft, '30min', 'Close', 28))
+dft2 = copy.deepcopy(dft)
+print(getAlert(dft2, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
+print(getAlert5pattern(dft, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
 #for index, row in df.iterrows():
     #ob_created_bear = False
     #ob_created_bull = False
