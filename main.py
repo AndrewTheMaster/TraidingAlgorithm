@@ -816,6 +816,7 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
 
 def BTCUSDT_30min():
     try:
+        print("code is working 30")
         df = getCandles('BTCUSDT', '30',300)
 
         print(getAlert(df, '30min', 'Close', 28, 'Candles', 'BTCUSDT'))
@@ -828,6 +829,7 @@ def BTCUSDT_30min():
         print("ShitHappens")
 def BTCUSDT_60min():
     try:
+        print("code is working 60")
         df = getCandles('BTCUSDT', '60',300)
 
         print(getAlert(df, '60min', 'Close', 28, 'Candles', 'BTCUSDT'))
@@ -840,6 +842,7 @@ def BTCUSDT_60min():
         print("ShitHappens")
 def BTCUSDT_15min():
     try:
+        print("code is working 15")
         df = getCandles('BTCUSDT', '15',300)
 
         print(getAlert(df, '15min', 'Close', 28, 'Candles', 'BTCUSDT'))
@@ -852,6 +855,7 @@ def BTCUSDT_15min():
         print("ShitHappens")
 def BTCUSDT_5min():
     try:
+        print("code is working 30")
         df = getCandles('BTCUSDT', '5',300)
 
         print(getAlert(df, '5min', 'Close', 28, 'Candles', 'BTCUSDT'))
