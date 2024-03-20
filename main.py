@@ -4,6 +4,8 @@ import numpy as np
 import copy
 import time
 import json
+import schedule
+
 
 def merge_dataframes(df1, df2):
     # Преобразование индексов в тип datetime, если они не являются таковыми
@@ -812,15 +814,7 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
 
 
 
-
-
-
-
-
-
-
-
-while True:
+def BTCUSDT_30min():
     try:
         df = getCandles('BTCUSDT', '30',300)
 
@@ -829,9 +823,57 @@ while True:
         dft2 = copy.deepcopy(dft)
         print(getAlert(dft2, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
         print(getAlert5pattern(dft, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
-        time.sleep(1800)
+        
     except Exception :
-        print("blyat")
+        print("ShitHappens")
+def BTCUSDT_60min():
+    try:
+        df = getCandles('BTCUSDT', '60',300)
+
+        print(getAlert(df, '60min', 'Close', 28, 'Candles', 'BTCUSDT'))
+        dft = getCandlesHeikenAshi('BTCUSDT', '60',300)
+        dft2 = copy.deepcopy(dft)
+        print(getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
+        print(getAlert5pattern(dft, '60min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
+        
+    except Exception :
+        print("ShitHappens")
+def BTCUSDT_15min():
+    try:
+        df = getCandles('BTCUSDT', '15',300)
+
+        print(getAlert(df, '15min', 'Close', 28, 'Candles', 'BTCUSDT'))
+        dft = getCandlesHeikenAshi('BTCUSDT', '15',300)
+        dft2 = copy.deepcopy(dft)
+        print(getAlert(dft2, '15min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
+        print(getAlert5pattern(dft, '15min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
+        
+    except Exception :
+        print("ShitHappens")
+def BTCUSDT_5min():
+    try:
+        df = getCandles('BTCUSDT', '5',300)
+
+        print(getAlert(df, '5min', 'Close', 28, 'Candles', 'BTCUSDT'))
+        dft = getCandlesHeikenAshi('BTCUSDT', '5',300)
+        dft2 = copy.deepcopy(dft)
+        print(getAlert(dft2, '5min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
+        print(getAlert5pattern(dft, '5min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
+        
+    except Exception :
+        print("ShitHappens")
+
+
+
+schedule.every(60).minutes.do(BTCUSDT_60min)
+schedule.every(30).minutes.do(BTCUSDT_30min)
+schedule.every(15).minutes.do(BTCUSDT_15min)
+schedule.every(5).minutes.do(BTCUSDT_5min)
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+
 
 #for index, row in df.iterrows():
     #ob_created_bear = False
