@@ -843,12 +843,10 @@ def BTCUSDT_60min():
 def BTCUSDT_15min():
     try:
         print("code is working 15")
-        df = getCandles('BTCUSDT', '15',300)
-
-        print(getAlert(df, '15min', 'Close', 28, 'Candles', 'BTCUSDT'))
+       
         dft = getCandlesHeikenAshi('BTCUSDT', '15',300)
-        dft2 = copy.deepcopy(dft)
-        print(getAlert(dft2, '15min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
+        
+      
         print(getAlert5pattern(dft, '15min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
         
     except Exception :
@@ -856,12 +854,9 @@ def BTCUSDT_15min():
 def BTCUSDT_5min():
     try:
         print("code is working 30")
-        df = getCandles('BTCUSDT', '5',300)
-
-        print(getAlert(df, '5min', 'Close', 28, 'Candles', 'BTCUSDT'))
+      
         dft = getCandlesHeikenAshi('BTCUSDT', '5',300)
-        dft2 = copy.deepcopy(dft)
-        print(getAlert(dft2, '5min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
+    
         print(getAlert5pattern(dft, '5min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
         
     except Exception :
