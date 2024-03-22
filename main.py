@@ -265,7 +265,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             if index>2 and (0.975>=(df.iloc[index-2]['High']-df.iloc[index-2]['Close'])/ (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>=1.025)  and (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
                                 if index == len(df)-1:
                                     
-                                    url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
+                                    url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                                     data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
@@ -287,7 +287,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                         if coin > 3:
                             if index == len(df)-1:
                                 
-                                url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
+                                url = "http://127.0.0.1:5000/api/v1/ppr-pattern"
                                 data = {
                                     "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
@@ -311,7 +311,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             if  (not(df.iloc[index-(iii+1)]['High']<bot)):
                                 if index == len(df)-1:
                                     
-                                    url = "http://94.228.123.228:5000/api/v1/pullback-pattern"
+                                    url = "http://127.0.0.1:5000/api/v1/pullback-pattern"
                                     data = {
                                             "trading_pair": str(symble),
                                             "type_of_candle": str(candle),
@@ -346,7 +346,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             if index>2 and (0.975>=(df.iloc[index-2]['High']-df.iloc[index-2]['Close'])/ (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>=1.025)  and (df.iloc[index-2]['Open']-df.iloc[index-2]['Low'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
                                 if index == len(df)-1:
                                   
-                                    url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
+                                    url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                                     data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
@@ -367,7 +367,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                         if coin > 3:
                             if index == len(df)-1:
                                
-                                url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
+                                url = "http://127.0.0.1:5000/api/v1/ppr-pattern"
                                 data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
@@ -401,7 +401,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                     if (abs((df.iloc[sbox-(iii+1)]['Close']-df.iloc[sbox-(iii+1)]['Open']))*3<= (df.iloc[sbox-(iii+1)]['High']-df.iloc[sbox-(iii+1)]['Open']) and  (abs(df.iloc[sbox-(iii+1)]['Close']-df.iloc[sbox-(iii+1)]['Open']))*3<= (df.iloc[sbox-(iii+1)]['Close']-df.iloc[sbox-(iii+1)]['Low'])):
                                         if index == len(df)-1:
                                            
-                                            url = "http://94.228.123.228:5000/api/v1/breakaway-gap-pattern"
+                                            url = "http://127.0.0.1:5000/api/v1/breakaway-gap-pattern"
                                             data = {
                                                     "trading_pair": str(symble),
                                                     "type_of_candle": str(candle),
@@ -442,7 +442,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             if index>2 and (0.975>=(df.iloc[index-2]['Close']-df.iloc[index-2]['Low'])/ (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>=1.025)  and (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
                                 if index == len(df)-1:
                                    
-                                    url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
+                                    url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                                     data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
@@ -463,7 +463,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                         if coin > 3:
                             if index == len(df)-1:
                                 
-                                url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
+                                url = "http://127.0.0.1:5000/api/v1/ppr-pattern"
                                 data = {
                                     "trading_pair": str(symble),
                                     "type_of_candle": str(candle),
@@ -489,7 +489,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             if  (not(df.iloc[index-(iii+1)]['Low']>top)):
                                 if index == len(df)-1:
                                   
-                                    url = "http://94.228.123.228:5000/api/v1/pullback-pattern"
+                                    url = "http://127.0.0.1:5000/api/v1/pullback-pattern"
                                     data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
@@ -526,7 +526,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             if index>2 and (0.975>=(df.iloc[index-2]['Close']-df.iloc[index-2]['Low'])/ (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>=1.025)  and (df.iloc[index-2]['High']-df.iloc[index-2]['Open'])>0:#Проверка на первую свечу в паттерне на одинаковые хвосты
                                 if index == len(df)-1:
                                  
-                                    url = "http://94.228.123.228:5000/api/v1/engulfing-pattern"
+                                    url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                                     data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
@@ -547,7 +547,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                         if coin > 3:
                             if index == len(df)-1:
                             
-                                url = "http://94.228.123.228:5000/api/v1/ppr-pattern"
+                                url = "http://127.0.0.1:5000/api/v1/ppr-pattern"
                                 data = {
                                     "trading_pair": str(symble),
                                     "type_of_candle": str(candle),
@@ -580,7 +580,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                     if ((abs(df.iloc[sbox-(ii+1)]['Open']-df.iloc[sbox-(ii+1)]['Close']))*3<= (df.iloc[sbox-(ii+1)]['High']-df.iloc[sbox-(ii+1)]['Open']) and  (abs(df.iloc[sbox-(ii+1)]['Open']-df.iloc[sbox-(ii+1)]['Close']))*3<= (df.iloc[sbox-(ii+1)]['Close']-df.iloc[sbox-(ii+1)]['Low'])):
                                         if index == len(df)-1:
                                         
-                                            url = "http://94.228.123.228:5000/api/v1/breakaway-gap-pattern"
+                                            url = "http://127.0.0.1:5000/api/v1/breakaway-gap-pattern"
                                             data = {
                                                 "trading_pair": str(symble),
                                                 "type_of_candle": str(candle),
@@ -751,7 +751,7 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
                          if ((abs(df.iloc[sbox-(r+d)]['Open']-df.iloc[sbox-(r+d)]['Close']))*3<= (df.iloc[sbox-(r+d)]['High']-df.iloc[sbox-(r+d)]['Open']) and  (abs(df.iloc[sbox-(r+d)]['Open']-df.iloc[sbox-(r+d)]['Close']))*3<= (df.iloc[sbox-(r+d)]['Close']-df.iloc[sbox-(r+d)]['Low'])):
                                         if sbox == len(df)-1:
                                          
-                                            url = "http://94.228.123.228:5000/api/v1/fifth-pattern"
+                                            url = "http://127.0.0.1:5000/api/v1/fifth-pattern"
                                             data = {
                                                 "trading_pair": str(symble),
                                                 "type_of_candle": str(candle),
@@ -787,7 +787,7 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
                          if ((abs(df.iloc[sbox-(r+d)]['Open']-df.iloc[sbox-(r+d)]['Close']))*3<= (df.iloc[sbox-(r+d)]['High']-df.iloc[sbox-(r+d)]['Open']) and  (abs(df.iloc[sbox-(r+d)]['Open']-df.iloc[sbox-(r+d)]['Close']))*3<= (df.iloc[sbox-(r+d)]['Close']-df.iloc[sbox-(r+d)]['Low'])):
                                         if sbox == len(df)-1:
                                            
-                                            url = "http://94.228.123.228:5000/api/v1/fifth-pattern"
+                                            url = "http://127.0.0.1:5000/api/v1/fifth-pattern"
                                             data = {
                                                 "trading_pair": str(symble),
                                                 "type_of_candle": str(candle),
