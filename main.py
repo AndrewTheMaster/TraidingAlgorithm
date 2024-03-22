@@ -825,8 +825,11 @@ def BTCUSDT_30min():
         print(getAlert(dft2, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
         print(getAlert5pattern(dft, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
         
-    except Exception :
-        print("ShitHappens")
+    except Exception as e:
+    
+        with open("errors.log", "a") as f:
+            
+            f.write(f"Ошибка: {str(e)}\n")
 def BTCUSDT_60min():
     try:
         print("code is working 60")
@@ -838,8 +841,11 @@ def BTCUSDT_60min():
         print(getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
         print(getAlert5pattern(dft, '60min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
         
-    except Exception :
-        print("ShitHappens")
+    except Exception as e:
+    
+        with open("errors.log", "a") as f:
+            
+            f.write(f"Ошибка: {str(e)}\n")
 def BTCUSDT_15min():
     try:
         print("code is working 15")
@@ -849,8 +855,11 @@ def BTCUSDT_15min():
       
         print(getAlert5pattern(dft, '15min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
         
-    except Exception :
-        print("ShitHappens")
+    except Exception as e:
+    
+        with open("errors.log", "a") as f:
+            
+            f.write(f"Ошибка: {str(e)}\n")
 def BTCUSDT_5min():
     try:
         print("code is working 30")
@@ -859,8 +868,11 @@ def BTCUSDT_5min():
     
         print(getAlert5pattern(dft, '5min', 'Close', 28, 'HeikinAshi', 'BTCUSDT'))
         
-    except Exception :
-        print("ShitHappens")
+    except Exception as e:
+    
+        with open("errors.log", "a") as f:
+            
+            f.write(f"Ошибка: {str(e)}\n")
 
 
 
