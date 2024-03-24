@@ -813,9 +813,10 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
     return df
 
 
-symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
 
-def BTCUSDT_30min(symbs):
+def BTCUSDT_30min():
+    symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
+
     for symb in symbs:
         try:
             print("code is working 30 " + symb)
@@ -832,7 +833,9 @@ def BTCUSDT_30min(symbs):
             with open("errors.log", "a") as f:
                 
                 f.write(f"Ошибка: {str(e)}\n")
-def BTCUSDT_60min(symbs):
+def BTCUSDT_60min():
+    symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
+
     for symb in symbs:
         try:
             print("code is working 60 " + symb)
@@ -849,7 +852,9 @@ def BTCUSDT_60min(symbs):
             with open("errors.log", "a") as f:
                 
                 f.write(f"Ошибка: {str(e)}\n")
-def BTCUSDT_15min(symbs):
+def BTCUSDT_15min():
+    symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
+
     for symb in symbs:
         try:
             print("code is working 15 " + symb)
@@ -864,7 +869,9 @@ def BTCUSDT_15min(symbs):
             with open("errors.log", "a") as f:
                 
                 f.write(f"Ошибка: {str(e)}\n")
-def BTCUSDT_5min(symbs):
+def BTCUSDT_5min():
+    symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
+
     for symb in symbs:
         try:
             print("code is working 5 " + symb)
@@ -881,10 +888,10 @@ def BTCUSDT_5min(symbs):
 
 
 
-schedule.every(60).minutes.do(BTCUSDT_60min(symbs))
-schedule.every(30).minutes.do(BTCUSDT_30min(symbs))
-schedule.every(15).minutes.do(BTCUSDT_15min(symbs))
-schedule.every(5).minutes.do(BTCUSDT_5min(symbs))
+schedule.every(60).minutes.do(BTCUSDT_60min)
+schedule.every(30).minutes.do(BTCUSDT_30min)
+schedule.every(15).minutes.do(BTCUSDT_15min)
+schedule.every(5).minutes.do(BTCUSDT_5min)
 while True:
     schedule.run_pending()
     time.sleep(1)
