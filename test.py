@@ -4,7 +4,7 @@ import numpy as np
 import copy
 import time
 import json
-import schedule
+
 
 
 def merge_dataframes(df1, df2):
@@ -876,13 +876,8 @@ def BTCUSDT_5min():
 
 
 
-schedule.every(60).minutes.do(BTCUSDT_60min)
-schedule.every(30).minutes.do(BTCUSDT_30min)
-schedule.every(15).minutes.do(BTCUSDT_15min)
-schedule.every(5).minutes.do(BTCUSDT_5min)
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+BTCUSDT_5min()
+
 
 
 

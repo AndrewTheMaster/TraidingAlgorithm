@@ -71,7 +71,7 @@ def getCandlesHeikenAshi(symb, tf, limit):
     r = requests.get(URL, params=params)
     df = pd.DataFrame(r.json()['result']['list'])
 
-    file_path = "CandlesHeikenAshi.csv"
+    file_path = f"{symb}/{symb}_{tf}_CandlesHeikenAshi.csv"
 
     with open(file_path, 'r', newline='', encoding='utf-8') as file:
         CSVdf = pd.read_csv(file_path, encoding='utf-8')
@@ -119,7 +119,7 @@ def getCandlesHeikenAshi(symb, tf, limit):
 
         #m_without_last_row = m.iloc[:-1]  # Исключаем последнюю строку
         m_without_last_row = m
-        file_name = f"{symb}_{tf}_CandlesHeikenAshi.csv"
+        file_name = f"{symb}/{symb}_{tf}_CandlesHeikenAshi.csv"
         m_without_last_row.to_csv(file_name, index=False, mode='w')
     
         m_without_last_row =  m_without_last_row[['Date', 'Open', 'High', 'Low', 'Close', 'Volume']]
@@ -390,7 +390,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             trigger = 0
                             for k in range(iii-1, 0, -1):
                                 # если они прячутся в тени большой свечи
-                                if(df.iloc[sbox-iii]['High']>df.iloc[sbox-k]['High']) and (df.iloc[sbox-iii]['Low']<df.iloc[sbox-k]['Low']):
+                                if(df.iloc[sbox-iii]['High']>df.iloc[sbox-k]['Close']) and (df.iloc[sbox-iii]['Low']<df.iloc[sbox-k]['Open']):
                                     k_coin+=1
                                     if (not(df.iloc[sbox-k]['High'] < prev_bot) ):
                                         trigger = 1
@@ -569,7 +569,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                             trigger = 0
                             for kk in range(ii-1, 0, -1):
                                 # если они прячутся в тени большой свечи
-                                if(df.iloc[sbox-ii]['High']>df.iloc[sbox-kk]['High'] and (df.iloc[sbox-ii]['Low']<df.iloc[sbox-kk]['Low'])):
+                                if(df.iloc[sbox-ii]['High']>df.iloc[sbox-kk]['Open'] and (df.iloc[sbox-ii]['Low']<df.iloc[sbox-kk]['Close'])):
                                     k_coin+=1
                                     if (not(df.iloc[sbox-kk]['Low'] < prev_top) ):
                                         trigger = 1
@@ -597,7 +597,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
     
     
 
-    df.to_csv('output111.csv')
+    
     return df
 
 
@@ -743,8 +743,12 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
              for r in range (1,20):
                 k_coin=0
                 for k in range (1,r):
-                     if (df.iloc[sbox-r]['High']>df.iloc[sbox-k]['High']) and (df.iloc[sbox-r]['Low']<df.iloc[sbox-k]['Low']):
-                         k_coin+=1
+                     if df.iloc[sbox-k]['Close']> df.iloc[sbox-k]['Open']:
+                        if (df.iloc[sbox-r]['High']>df.iloc[sbox-k]['Close']) and (df.iloc[sbox-r]['Low']<df.iloc[sbox-k]['Open']):
+                            k_coin+=1
+                     else:
+                        if (df.iloc[sbox-r]['High']>df.iloc[sbox-k]['Open']) and (df.iloc[sbox-r]['Low']<df.iloc[sbox-k]['Close']):
+                            k_coin+=1
                 if (r-1)==k_coin:
                     #нашли большую свечу которая прячет в себе предыдущие свечи
                     for d in range (1,5):
@@ -779,8 +783,12 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
              for r in range (1,20):
                 k_coin=0
                 for k in range (1,r):
-                     if (df.iloc[sbox-r]['High']>df.iloc[sbox-k]['High']) and (df.iloc[sbox-r]['Low']<df.iloc[sbox-k]['Low']):
-                         k_coin+=1
+                     if df.iloc[sbox-k]['Close']> df.iloc[sbox-k]['Open']:
+                        if (df.iloc[sbox-r]['High']>df.iloc[sbox-k]['Close']) and (df.iloc[sbox-r]['Low']<df.iloc[sbox-k]['Open']):
+                            k_coin+=1
+                     else:
+                        if (df.iloc[sbox-r]['High']>df.iloc[sbox-k]['Open']) and (df.iloc[sbox-r]['Low']<df.iloc[sbox-k]['Close']):
+                            k_coin+=1
                 if (r-1)==k_coin:
                     #нашли большую свечу которая прячет в себе предыдущие свечи
                     for d in range (1,5):
@@ -801,78 +809,82 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
                                             requests.post(url=url, data=data, headers=headers)
                                       
 
-    df.to_csv('output11.csv')
+    
     return df
 
 
+symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
 
+def BTCUSDT_30min(symbs):
+    for symb in symbs:
+        try:
+            print("code is working 30 " + symb)
+            df = getCandles(symb, '30',300)
 
-def BTCUSDT_30min():
-    try:
-        print("code is working 30")
-        df = getCandles('BTCUSDT', '30',300)
-
-        getAlert(df, '30min', 'Close', 28, 'Candles', 'BTCUSDT')
-        dft = getCandlesHeikenAshi('BTCUSDT', '30',300)
-        dft2 = copy.deepcopy(dft)
-        getAlert(dft2, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT')
-        getAlert5pattern(dft, '30min', 'Close', 28, 'HeikinAshi', 'BTCUSDT')
-        
-    except Exception as e:
-    
-        with open("errors.log", "a") as f:
+            getAlert(df, '30min', 'Close', 28, 'Candles', symb)
+            dft = getCandlesHeikenAshi(symb, '30',300)
+            dft2 = copy.deepcopy(dft)
+            getAlert(dft2, '30min', 'Close', 28, 'HeikinAshi', symb)
+            getAlert5pattern(dft, '30min', 'Close', 28, 'HeikinAshi', symb)
             
-            f.write(f"Ошибка: {str(e)}\n")
-def BTCUSDT_60min():
-    try:
-        print("code is working 60")
-        df = getCandles('BTCUSDT', '60',300)
-
-        getAlert(df, '60min', 'Close', 28, 'Candles', 'BTCUSDT')
-        dft = getCandlesHeikenAshi('BTCUSDT', '60',300)
-        dft2 = copy.deepcopy(dft)
-        getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', 'BTCUSDT')
-        getAlert5pattern(dft, '60min', 'Close', 28, 'HeikinAshi', 'BTCUSDT')
+        except Exception as e:
         
-    except Exception as e:
-    
-        with open("errors.log", "a") as f:
+            with open("errors.log", "a") as f:
+                
+                f.write(f"Ошибка: {str(e)}\n")
+def BTCUSDT_60min(symbs):
+    for symb in symbs:
+        try:
+            print("code is working 60 " + symb)
+            df = getCandles(symb, '60',300)
+
+            getAlert(df, '60min', 'Close', 28, 'Candles', symb)
+            dft = getCandlesHeikenAshi(symb, '60',300)
+            dft2 = copy.deepcopy(dft)
+            getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', symb)
+            getAlert5pattern(dft, '60min', 'Close', 28, 'HeikinAshi', symb)
             
-            f.write(f"Ошибка: {str(e)}\n")
-def BTCUSDT_15min():
-    try:
-        print("code is working 15")
-       
-        dft = getCandlesHeikenAshi('BTCUSDT', '15',300)
+        except Exception as e:
         
-      
-        getAlert5pattern(dft, '15min', 'Close', 28, 'HeikinAshi', 'BTCUSDT')
+            with open("errors.log", "a") as f:
+                
+                f.write(f"Ошибка: {str(e)}\n")
+def BTCUSDT_15min(symbs):
+    for symb in symbs:
+        try:
+            print("code is working 15 " + symb)
         
-    except Exception as e:
-    
-        with open("errors.log", "a") as f:
+            dft = getCandlesHeikenAshi(symb, '15',300)
             
-            f.write(f"Ошибка: {str(e)}\n")
-def BTCUSDT_5min():
-    try:
-        print("code is working 30")
-      
-        dft = getCandlesHeikenAshi('BTCUSDT', '5',300)
-    
-        getAlert5pattern(dft, '5min', 'Close', 28, 'HeikinAshi', 'BTCUSDT')
         
-    except Exception as e:
-    
-        with open("errors.log", "a") as f:
+            getAlert5pattern(dft, '15min', 'Close', 28, 'HeikinAshi', symb)
             
-            f.write(f"Ошибка: {str(e)}\n")
+        except Exception as e:
+        
+            with open("errors.log", "a") as f:
+                
+                f.write(f"Ошибка: {str(e)}\n")
+def BTCUSDT_5min(symbs):
+    for symb in symbs:
+        try:
+            print("code is working 5 " + symb)
+        
+            dft = getCandlesHeikenAshi(symb, '5',300)
+        
+            getAlert5pattern(dft, '5min', 'Close', 28, 'HeikinAshi', symb)
+            
+        except Exception as e:
+        
+            with open("errors.log", "a") as f:
+                
+                f.write(f"Ошибка: {str(e)}\n")
 
 
 
-schedule.every(60).minutes.do(BTCUSDT_60min)
-schedule.every(30).minutes.do(BTCUSDT_30min)
-schedule.every(15).minutes.do(BTCUSDT_15min)
-schedule.every(5).minutes.do(BTCUSDT_5min)
+schedule.every(60).minutes.do(BTCUSDT_60min(symbs))
+schedule.every(30).minutes.do(BTCUSDT_30min(symbs))
+schedule.every(15).minutes.do(BTCUSDT_15min(symbs))
+schedule.every(5).minutes.do(BTCUSDT_5min(symbs))
 while True:
     schedule.run_pending()
     time.sleep(1)
