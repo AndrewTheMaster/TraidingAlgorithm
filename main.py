@@ -94,7 +94,7 @@ def getCandlesHeikenAshi(symb, tf, limit):
 
         # Найдем дату в DataFrame m, соответствующую дате в последней строке CSVdf
         start_date = last_row['Date'].iloc[0]
-     
+        
 
         important_index =  last_row.index
        
@@ -269,7 +269,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                     data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
-                                        "entry_type": "short",
+                                        "entry_type": f"short{df.iloc[index]['Date']}",
                                         "timeframe": str(tf)
                                         }
                                     data = json.dumps(data)
@@ -291,7 +291,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                 data = {
                                     "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
-                                        "entry_type": "short",
+                                        "entry_type": f"short{df.iloc[index]['Date']}",
                                         "timeframe": str(tf)
                                         }
                                 data = json.dumps(data)
@@ -315,7 +315,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                     data = {
                                             "trading_pair": str(symble),
                                             "type_of_candle": str(candle),
-                                            "entry_type": "short",
+                                            "entry_type": f"short{df.iloc[index]['Date']}",
                                             "timeframe": str(tf)
                                             }
                                     data = json.dumps(data)
@@ -350,7 +350,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                     data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
-                                        "entry_type": "shortDouble",
+                                        "entry_type": f"shortDouble{df.iloc[index]['Date']}",
                                         "timeframe": str(tf)
                                         }
                                     data = json.dumps(data)
@@ -371,7 +371,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                 data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
-                                        "entry_type": "shortDouble",
+                                        "entry_type": f"shortDouble{df.iloc[index]['Date']}",
                                         "timeframe": str(tf)
                                         }
                                 data = json.dumps(data)
@@ -405,7 +405,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                             data = {
                                                     "trading_pair": str(symble),
                                                     "type_of_candle": str(candle),
-                                                    "entry_type": "shortDouble",
+                                                    "entry_type": f"shortDouble{df.iloc[sbox-iii]['Date']}",
                                                     "timeframe": str(tf)
                                                     }
                                             data = json.dumps(data)
@@ -446,7 +446,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                     data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
-                                        "entry_type": "long",
+                                        "entry_type": f"long{df.iloc[index]['Date']}",
                                         "timeframe": str(tf)
                                         }
                                     data = json.dumps(data)
@@ -467,7 +467,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                 data = {
                                     "trading_pair": str(symble),
                                     "type_of_candle": str(candle),
-                                    "entry_type": "long",
+                                    "entry_type": f"long{df.iloc[index]['Date']}",
                                     "timeframe": str(tf)
                                     }
                                 data = json.dumps(data)
@@ -493,8 +493,9 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                     data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
-                                        "entry_type": "long",
+                                        "entry_type": f"long{df.iloc[index]['Date']}",
                                         "timeframe": str(tf)
+
                                         }
                                     data = json.dumps(data)
                                     headers = {
@@ -530,7 +531,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                     data = {
                                         "trading_pair": str(symble),
                                         "type_of_candle": str(candle),
-                                        "entry_type": "longDouble",
+                                        "entry_type": f"longDouble{df.iloc[index]['Date']}",
                                         "timeframe": str(tf)
                                         }
                                     data = json.dumps(data)
@@ -551,7 +552,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                 data = {
                                     "trading_pair": str(symble),
                                     "type_of_candle": str(candle),
-                                    "entry_type": "longDouble",
+                                    "entry_type": f"longDouble{df.iloc[index]['Date']}",
                                     "timeframe": str(tf)
                                     }
                                 data = json.dumps(data)
@@ -584,7 +585,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                                             data = {
                                                 "trading_pair": str(symble),
                                                 "type_of_candle": str(candle),
-                                                "entry_type": "longDouble",
+                                                "entry_type": f"longDouble{df.iloc[sbox-ii]['Date']}",
                                                 "timeframe": str(tf)
                                                 }
                                             data = json.dumps(data)
@@ -759,7 +760,7 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
                                             data = {
                                                 "trading_pair": str(symble),
                                                 "type_of_candle": str(candle),
-                                                "entry_type": "short",
+                                                "entry_type": f"short{df.iloc[sbox-r]['Date']}",
                                                 "timeframe": str(tf)
                                                 }
                                             data = json.dumps(data)
@@ -799,7 +800,7 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
                                             data = {
                                                 "trading_pair": str(symble),
                                                 "type_of_candle": str(candle),
-                                                "entry_type": "long",
+                                                "entry_type": f"long{df.iloc[sbox-r]['Date']}",
                                                 "timeframe": str(tf)
                                                 }
                                             data = json.dumps(data)
