@@ -262,7 +262,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                 
                 
                 high = df.iloc[index]['High']
-                if (not(high < bot)  and (index >( len(df) -10 )) ):
+                if (not(high < bot)  and (index >( len(df) -2 )) ):
                     
                     #fourth pattern (just sonarlab heikin ashi)
                     url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
@@ -358,7 +358,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                 high = df.iloc[index]['High']
                 
                 
-                if (not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) -10 ))):
+                if (not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) -2 ))):
                     #fourth pattern (just sonarlab heikin ashi)
                     
                     url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
@@ -468,7 +468,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
              
              for index in range(sbox, len(df)):
                 low = df.iloc[index]['Low']
-                if (not(low>top) and (index >( len(df) -10 ))):
+                if (not(low>top) and (index >( len(df) -2 ))):
                     #fourth pattern (just sonarlab heikin ashi)
                     url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     data = {
@@ -566,7 +566,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
       
              for index in range(prev_sbox, len(df)):
                 low = df.iloc[index]['Low']
-                if (not(low>top) and not(low >prev_top) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) -10 ))):
+                if (not(low>top) and not(low >prev_top) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) - 2 ))):
                     #fourth pattern (just sonarlab heikin ashi)
                     url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     data = {
