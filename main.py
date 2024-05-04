@@ -5,6 +5,9 @@ import copy
 import time
 import json
 import schedule
+import logging
+logging.basicConfig(level=logging.DEBUG, filename='errors.log', filemode='w',
+                    format='%(asctime)s %(levelname)s %(message)s')
 
 
 def merge_dataframes(df1, df2):
@@ -255,15 +258,17 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
              bot = df.iloc[sbox]['Low']
 
              for index in range(sbox, len(df)):
-                
+               
+
                 high = df.iloc[index]['High']
                 if (not(high < bot) ):
+
                     #fourth pattern (just sonarlab heikin ashi)
                     url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     data = {
                         "trading_pair": str(symble),
                         "type_of_candle": str(candle),
-                        "entry_type": f"short{df.iloc[index]['Date']}",
+                        "entry_type": f"short{df.iloc[index].name}",
                         "timeframe": str(tf)
                         }
                     data = json.dumps(data)
@@ -351,19 +356,22 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
              for index in range(prev_sbox, len(df)):
                 high = df.iloc[index]['High']
                 
+                
                 if (not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0)):
                     #fourth pattern (just sonarlab heikin ashi)
+                    
                     url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     data = {
                         "trading_pair": str(symble),
                         "type_of_candle": str(candle),
-                        "entry_type": f"shortDouble{df.iloc[index]['Date']}",
+                        "entry_type": f"shortDouble{df.iloc[index].name}",
                         "timeframe": str(tf)
                         }
                     data = json.dumps(data)
                     headers = {
                         'Content-Type': 'application/json'
                     } 
+                    
                     requests.post(url=url, data=data, headers=headers)
                 #     #first pattern
                 #     if candle=='Candle' and (0.975>=(df.iloc[index]['Open'] - df.iloc[index]['Close'])/(df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])>=1.025)   and (df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])!=0:#Последняя свеча поглощает вторую
@@ -465,7 +473,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                     data = {
                         "trading_pair": str(symble),
                         "type_of_candle": str(candle),
-                        "entry_type": f"long{df.iloc[index]['Date']}",
+                        "entry_type": f"long{df.iloc[index].name}",
                         "timeframe": str(tf)
                         }
                     data = json.dumps(data)
@@ -563,7 +571,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                     data = {
                         "trading_pair": str(symble),
                         "type_of_candle": str(candle),
-                        "entry_type": f"longDouble{df.iloc[index]['Date']}",
+                        "entry_type": f"longDouble{df.iloc[index].name}",
                         "timeframe": str(tf)
                         }
                     data = json.dumps(data)
@@ -882,9 +890,8 @@ def BTCUSDT_30min():
             
         except Exception as e:
         
-            with open("errors.log", "a") as f:
-                
-                f.write(f"Ошибка: {str(e)}\n")
+            
+            logging.exception(f"30min tf   ")
 def BTCUSDT_60min():
     symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
 
@@ -901,9 +908,8 @@ def BTCUSDT_60min():
             
         except Exception as e:
         
-            with open("errors.log", "a") as f:
-                
-                f.write(f"Ошибка: {str(e)}\n")
+            
+            logging.exception(f"60min tf   ")
 def BTCUSDT_15min():
     symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
 
@@ -918,9 +924,8 @@ def BTCUSDT_15min():
             
         except Exception as e:
         
-            with open("errors.log", "a") as f:
-                
-                f.write(f"Ошибка: {str(e)}\n")
+            
+            logging.exception(f"15min tf   ")
 def BTCUSDT_5min():
     symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
 
@@ -934,9 +939,8 @@ def BTCUSDT_5min():
             
         except Exception as e:
         
-            with open("errors.log", "a") as f:
-                
-                f.write(f"Ошибка: {str(e)}\n")
+            
+            logging.exception(f"5min tf   ")
 
 
 
@@ -947,6 +951,10 @@ schedule.every(5).minutes.do(BTCUSDT_5min)
 while True:
     schedule.run_pending()
     time.sleep(1)
+# BTCUSDT_60min()
+# BTCUSDT_30min()
+# BTCUSDT_15min()
+# BTCUSDT_5min()
 
 
 
