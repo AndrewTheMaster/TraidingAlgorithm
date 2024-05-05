@@ -262,7 +262,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                 
                 
                 high = df.iloc[index]['High']
-                if (not(high < bot)  and (index >( len(df) -2 )) ):
+                if (not(high < bot)  and (index >( len(df) - 1 )) ):
                     
                     #fourth pattern (just sonarlab heikin ashi)
                     url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
@@ -358,7 +358,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                 high = df.iloc[index]['High']
                 
                 
-                if (not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) -2 ))):
+                if (not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) - 1 ))):
                     #fourth pattern (just sonarlab heikin ashi)
                     
                     url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
@@ -468,7 +468,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
              
              for index in range(sbox, len(df)):
                 low = df.iloc[index]['Low']
-                if (not(low>top) and (index >( len(df) -2 ))):
+                if (not(low>top) and (index >( len(df) - 1 ))):
                     #fourth pattern (just sonarlab heikin ashi)
                     url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     data = {
@@ -566,7 +566,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
       
              for index in range(prev_sbox, len(df)):
                 low = df.iloc[index]['Low']
-                if (not(low>top) and not(low >prev_top) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) - 2 ))):
+                if (not(low>top) and not(low >prev_top) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) - 1 ))):
                     #fourth pattern (just sonarlab heikin ashi)
                     url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     data = {
@@ -875,18 +875,18 @@ def getAlert5pattern(df, tf, OBMitigationType, sens, candle, symble):
 
 
 
-def BTCUSDT_30min():
+def BTCUSDT_240min():
     symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
 
     for symb in symbs:
         try:
-            print("code is working 30 " + symb)
-            df = getCandles(symb, '30',300)
+            print("code is working 240 " + symb)
+            df = getCandles(symb, '240',300)
 
             #getAlert(df, '30min', 'Close', 28, 'Candles', symb)
-            dft = getCandlesHeikenAshi(symb, '30',300)
+            dft = getCandlesHeikenAshi(symb, '240',300)
             dft2 = copy.deepcopy(dft)
-            getAlert(dft2, '30min', 'Close', 28, 'HeikinAshi', symb)
+            getAlert(dft2, '240min', 'Close', 28, 'HeikinAshi', symb)
             #getAlert5pattern(dft, '30min', 'Close', 28, 'HeikinAshi', symb)
             
         except Exception as e:
@@ -927,28 +927,28 @@ def BTCUSDT_15min():
         
             
             logging.exception(f"15min tf   ")
-def BTCUSDT_5min():
-    symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
+# def BTCUSDT_5min():
+#     symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
 
-    for symb in symbs:
-        try:
-            print("code is working 5 " + symb)
+#     for symb in symbs:
+#         try:
+#             print("code is working 5 " + symb)
         
-            dft = getCandlesHeikenAshi(symb, '5',300)
-            getAlert(dft, '5min', 'Close', 28, 'HeikinAshi', symb)
-            #getAlert5pattern(dft, '5min', 'Close', 28, 'HeikinAshi', symb)
+#             dft = getCandlesHeikenAshi(symb, '5',300)
+#             getAlert(dft, '5min', 'Close', 28, 'HeikinAshi', symb)
+#             #getAlert5pattern(dft, '5min', 'Close', 28, 'HeikinAshi', symb)
             
-        except Exception as e:
+#         except Exception as e:
         
             
-            logging.exception(f"5min tf   ")
+#             logging.exception(f"5min tf   ")
 
 
 
 schedule.every(60).minutes.do(BTCUSDT_60min)
-schedule.every(30).minutes.do(BTCUSDT_30min)
+schedule.every(240).minutes.do(BTCUSDT_240min)
 schedule.every(15).minutes.do(BTCUSDT_15min)
-schedule.every(5).minutes.do(BTCUSDT_5min)
+# schedule.every(5).minutes.do(BTCUSDT_5min)
 while True:
     schedule.run_pending()
     time.sleep(1)
