@@ -248,7 +248,8 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
     
     # # Оповещения для медвежьих блоков
     #вхождение в одинарный шортбокс
-   
+    df['longOB'] = 0
+    df['shortOB'] = 0
     if (len(shortBoxes)>0):
          for i in range(0, len(shortBoxes)):
           
@@ -262,21 +263,21 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                 
                 
                 high = df.iloc[index]['High']
-                if (not(high < bot)  and (index >( len(df) - 2 )) ):
-                    
+                if (not(high < bot)  ):
+                    df.loc[index, 'shortOB'] += 1
                     #fourth pattern (just sonarlab heikin ashi)
-                    url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
-                    data = {
-                        "trading_pair": str(symble),
-                        "type_of_candle": str(candle),
-                        "entry_type": f"short{df.iloc[index].name}",
-                        "timeframe": str(tf)
-                        }
-                    data = json.dumps(data)
-                    headers = {
-                        'Content-Type': 'application/json'
-                    } 
-                    requests.post(url=url, data=data, headers=headers)
+                    # url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
+                    # data = {
+                    #     "trading_pair": str(symble),
+                    #     "type_of_candle": str(candle),
+                    #     "entry_type": f"short{df.iloc[index].name}",
+                    #     "timeframe": str(tf)
+                    #     }
+                    # data = json.dumps(data)
+                    # headers = {
+                    #     'Content-Type': 'application/json'
+                    # } 
+                    # requests.post(url=url, data=data, headers=headers)
                     
                     # #first pattern
                     # if candle == 'Candles' and (0.975>=(df.iloc[index]['Open'] - df.iloc[index]['Close'])/(df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])>=1.025)   and (df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])!=0:#Последняя свеча поглощает вторую
@@ -344,36 +345,36 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                     #                 requests.post(url=url, data=data, headers=headers)
                         # else: break
     #вхождение в двойной шортбокс
-    if (len(shortBoxes)>1):
-         for i in range(0, len(shortBoxes)-1):
+    # if (len(shortBoxes)>1):
+    #      for i in range(0, len(shortBoxes)-1):
         
-             sbox=df.index.get_loc(shortBoxes[i]['prod'])
-             prev_sbox=df.index.get_loc(shortBoxes[i+1]['prod'])
-             top = df.iloc[sbox]['High']
-             prev_top = df.iloc[prev_sbox]['High']
-             bot = df.iloc[sbox]['Low']
-             prev_bot = df.iloc[prev_sbox]['Low']
+    #          sbox=df.index.get_loc(shortBoxes[i]['prod'])
+    #          prev_sbox=df.index.get_loc(shortBoxes[i+1]['prod'])
+    #          top = df.iloc[sbox]['High']
+    #          prev_top = df.iloc[prev_sbox]['High']
+    #          bot = df.iloc[sbox]['Low']
+    #          prev_bot = df.iloc[prev_sbox]['Low']
 
-             for index in range(prev_sbox, len(df)):
-                high = df.iloc[index]['High']
+    #          for index in range(prev_sbox, len(df)):
+    #             high = df.iloc[index]['High']
                 
                 
-                if (not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) - 2))):
-                    #fourth pattern (just sonarlab heikin ashi)
+    #             if (not(high < bot) and not(high < prev_bot) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) - 2))):
+    #                 #fourth pattern (just sonarlab heikin ashi)
                     
-                    url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
-                    data = {
-                        "trading_pair": str(symble),
-                        "type_of_candle": str(candle),
-                        "entry_type": f"shortDouble{df.iloc[index].name}",
-                        "timeframe": str(tf)
-                        }
-                    data = json.dumps(data)
-                    headers = {
-                        'Content-Type': 'application/json'
-                    } 
+    #                 url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
+    #                 data = {
+    #                     "trading_pair": str(symble),
+    #                     "type_of_candle": str(candle),
+    #                     "entry_type": f"shortDouble{df.iloc[index].name}",
+    #                     "timeframe": str(tf)
+    #                     }
+    #                 data = json.dumps(data)
+    #                 headers = {
+    #                     'Content-Type': 'application/json'
+    #                 } 
                     
-                    requests.post(url=url, data=data, headers=headers)
+    #                 requests.post(url=url, data=data, headers=headers)
                 #     #first pattern
                 #     if candle=='Candle' and (0.975>=(df.iloc[index]['Open'] - df.iloc[index]['Close'])/(df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])>=1.025)   and (df.iloc[index-1]['Close']-df.iloc[index-1]['Low'])!=0:#Последняя свеча поглощает вторую
                 #         if (df.iloc[index-1]['Open'] - df.iloc[index-1]['Low'])/(df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])>=3   and (df.iloc[index-1]['Close'] - df.iloc[index-1]['Open'])!=0: #Проверка второй свечи на то что она пинбар
@@ -468,20 +469,21 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
              
              for index in range(sbox, len(df)):
                 low = df.iloc[index]['Low']
-                if (not(low>top) and (index >( len(df) - 2 ))):
+                if (not(low>top) ):
+                    df.loc[index, 'longOB'] += 1
                     #fourth pattern (just sonarlab heikin ashi)
-                    url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
-                    data = {
-                        "trading_pair": str(symble),
-                        "type_of_candle": str(candle),
-                        "entry_type": f"long{df.iloc[index].name}",
-                        "timeframe": str(tf)
-                        }
-                    data = json.dumps(data)
-                    headers = {
-                        'Content-Type': 'application/json'
-                    } 
-                    requests.post(url=url, data=data, headers=headers)
+                    # url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
+                    # data = {
+                    #     "trading_pair": str(symble),
+                    #     "type_of_candle": str(candle),
+                    #     "entry_type": f"long{df.iloc[index].name}",
+                    #     "timeframe": str(tf)
+                    #     }
+                    # data = json.dumps(data)
+                    # headers = {
+                    #     'Content-Type': 'application/json'
+                    # } 
+                    # requests.post(url=url, data=data, headers=headers)
                    
                     # #first pattern
                     # if candle== 'Candle' and (0.975>=(df.iloc[index]['Close'] - df.iloc[index]['Open'])/(df.iloc[index-1]['High']-df.iloc[index-1]['Close'])>=1.025)   and (df.iloc[index-1]['High']-df.iloc[index-1]['Close'])!=0:#Последняя свеча поглощает вторую
@@ -552,34 +554,47 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                     #     else: break
                     #     k_coin=0
                     #     ArcTop =0
-
+    if ((df.loc[:, 'longOB'].iloc[-1]!=0 ) or (df.loc[:, 'shortOB'].iloc[-1]!=0 )):
+        #fourth pattern (just sonarlab heikin ashi)
+        url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
+        data = {
+            "trading_pair": str(symble),
+            "type_of_candle": str(candle),
+            "entry_type": f"long:{df.loc[:, 'longOB'].iloc[-1]} short: {df.loc[:, 'shortOB'].iloc[-1]} time: {df.iloc[-1].name}",
+            "timeframe": str(tf)
+            }
+        data = json.dumps(data)
+        headers = {
+            'Content-Type': 'application/json'
+        } 
+        requests.post(url=url, data=data, headers=headers)
     #вхождение в Двойной лонгбокс
-    if (len(longBoxes) > 1):
-        for i in range(0, len(longBoxes)-1):
+    # if (len(longBoxes) > 1):
+    #     for i in range(0, len(longBoxes)-1):
          
-             sbox=df.index.get_loc(longBoxes[i]['prod'])
-             prev_sbox=df.index.get_loc(longBoxes[i+1]['prod'])
-             top = df.iloc[sbox]['High']
-             prev_top = df.iloc[prev_sbox]['High']
-             bot = df.iloc[sbox]['Low']
-             prev_bot = df.iloc[prev_sbox]['Low']
+    #          sbox=df.index.get_loc(longBoxes[i]['prod'])
+    #          prev_sbox=df.index.get_loc(longBoxes[i+1]['prod'])
+    #          top = df.iloc[sbox]['High']
+    #          prev_top = df.iloc[prev_sbox]['High']
+    #          bot = df.iloc[sbox]['Low']
+    #          prev_bot = df.iloc[prev_sbox]['Low']
       
-             for index in range(prev_sbox, len(df)):
-                low = df.iloc[index]['Low']
-                if (not(low>top) and not(low >prev_top) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) - 2 ))):
-                    #fourth pattern (just sonarlab heikin ashi)
-                    url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
-                    data = {
-                        "trading_pair": str(symble),
-                        "type_of_candle": str(candle),
-                        "entry_type": f"longDouble{df.iloc[index].name}",
-                        "timeframe": str(tf)
-                        }
-                    data = json.dumps(data)
-                    headers = {
-                        'Content-Type': 'application/json'
-                    } 
-                    requests.post(url=url, data=data, headers=headers)
+    #          for index in range(prev_sbox, len(df)):
+    #             low = df.iloc[index]['Low']
+    #             if (not(low>top) and not(low >prev_top) and ((bot - prev_top)<0 or (prev_bot - top)<0) and (index >( len(df) - 2 ))):
+    #                 #fourth pattern (just sonarlab heikin ashi)
+    #                 url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
+    #                 data = {
+    #                     "trading_pair": str(symble),
+    #                     "type_of_candle": str(candle),
+    #                     "entry_type": f"longDouble{df.iloc[index].name}",
+    #                     "timeframe": str(tf)
+    #                     }
+    #                 data = json.dumps(data)
+    #                 headers = {
+    #                     'Content-Type': 'application/json'
+    #                 } 
+    #                 requests.post(url=url, data=data, headers=headers)
 
                 #     #first pattern
                 #     if  candle== 'Candle'and (0.975>=(df.iloc[index]['Close'] - df.iloc[index]['Open'])/(df.iloc[index-1]['High']-df.iloc[index-1]['Close'])>=1.025)   and (df.iloc[index-1]['High']-df.iloc[index-1]['Close'])!=0:#Последняя свеча поглощает вторую
