@@ -264,7 +264,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                 
                 high = df.iloc[index]['High']
                 if (not(high < bot)  ):
-                    df.iloc[index]['shortOB'] += 1
+                    df.iloc[index]['shortOB'] = 1+ df.iloc[index]['shortOB'] 
                     #fourth pattern (just sonarlab heikin ashi)
                     # url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     # data = {
@@ -470,7 +470,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
              for index in range(sbox, len(df)):
                 low = df.iloc[index]['Low']
                 if (not(low>top) ):
-                    df.iloc[index]['longOB'] += 1
+                    df.iloc[index]['longOB'] = 1+df.iloc[index]['longOB']
                     #fourth pattern (just sonarlab heikin ashi)
                     # url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     # data = {
@@ -563,11 +563,14 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
             "entry_type": f"long:{df.loc[:, 'longOB'].iloc[-1]} short: {df.loc[:, 'shortOB'].iloc[-1]} time: {df.iloc[-1].name}",
             "timeframe": str(tf)
             }
+        
         data = json.dumps(data)
         headers = {
             'Content-Type': 'application/json'
         } 
         requests.post(url=url, data=data, headers=headers)
+        
+        
     #вхождение в Двойной лонгбокс
     # if (len(longBoxes) > 1):
     #     for i in range(0, len(longBoxes)-1):
@@ -672,7 +675,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                 #             break#попалась зеленая свеча
     
     
-
+    
     
     return df
 
@@ -938,6 +941,7 @@ def BTCUSDT_15min():
             getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)
             #getAlert5pattern(dft, '15min', 'Close', 28, 'HeikinAshi', symb)
             
+            
         except Exception as e:
         
             
@@ -960,16 +964,17 @@ def BTCUSDT_15min():
 
 
 
-schedule.every(60).minutes.do(BTCUSDT_60min)
-schedule.every(240).minutes.do(BTCUSDT_240min)
-schedule.every(15).minutes.do(BTCUSDT_15min)
-# schedule.every(5).minutes.do(BTCUSDT_5min)
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+# schedule.every(60).minutes.do(BTCUSDT_60min)
+# schedule.every(240).minutes.do(BTCUSDT_240min)
+# schedule.every(15).minutes.do(BTCUSDT_15min)
+# # schedule.every(5).minutes.do(BTCUSDT_5min)
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
+    
 # BTCUSDT_60min()
 # BTCUSDT_30min()
-# BTCUSDT_15min()
+BTCUSDT_15min()
 # BTCUSDT_5min()
 
 
