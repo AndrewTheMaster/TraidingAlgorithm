@@ -264,7 +264,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                 
                 high = df.iloc[index]['High']
                 if (not(high < bot)  ):
-                    df.loc[index, 'shortOB'] += 1
+                    df.iloc[index][ 'shortOB'] += 1
                     #fourth pattern (just sonarlab heikin ashi)
                     # url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     # data = {
@@ -470,7 +470,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
              for index in range(sbox, len(df)):
                 low = df.iloc[index]['Low']
                 if (not(low>top) ):
-                    df.loc[index, 'longOB'] += 1
+                    df.iloc[index]['longOB'] += 1
                     #fourth pattern (just sonarlab heikin ashi)
                     # url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     # data = {
