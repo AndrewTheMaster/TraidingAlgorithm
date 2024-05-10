@@ -1,210 +1,285 @@
-2024-05-08 18:00:52,821 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:00:53,185 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=BTCUSDT&interval=15&limit=300 HTTP/1.1" 200 27864
-2024-05-08 18:00:53,399 ERROR 15min tf   
+2024-05-11 01:04:44,390 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:44,933 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=BTCUSDT&interval=15&limit=300 HTTP/1.1" 200 27852
+2024-05-11 01:04:45,375 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:00:53,403 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:00:54,106 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=ETHUSDT&interval=15&limit=300 HTTP/1.1" 200 26395
-2024-05-08 18:00:54,339 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 276
+2024-05-11 01:04:45,379 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:46,315 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=ETHUSDT&interval=15&limit=300 HTTP/1.1" 200 26382
+2024-05-11 01:04:46,787 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:00:54,341 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:00:54,722 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MNTUSDT&interval=15&limit=300 HTTP/1.1" 200 24542
-2024-05-08 18:00:54,747 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 9
+2024-05-11 01:04:46,789 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:47,323 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MNTUSDT&interval=15&limit=300 HTTP/1.1" 200 24548
+2024-05-11 01:04:47,826 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:00:54,750 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:00:55,041 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=XRPUSDT&interval=15&limit=300 HTTP/1.1" 200 24679
-2024-05-08 18:00:55,066 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 9
+2024-05-11 01:04:47,828 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:48,762 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=XRPUSDT&interval=15&limit=300 HTTP/1.1" 200 24660
+2024-05-11 01:04:49,264 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:00:55,068 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:00:55,442 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=CTCUSDT&interval=15&limit=300 HTTP/1.1" 200 26236
-2024-05-08 18:00:55,670 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 4
+2024-05-11 01:04:49,265 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:50,226 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=CTCUSDT&interval=15&limit=300 HTTP/1.1" 200 26349
+2024-05-11 01:04:50,720 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:00:55,672 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:00:56,462 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=PLANETUSDT&interval=15&limit=300 HTTP/1.1" 200 30762
-2024-05-08 18:00:56,676 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 62
+2024-05-11 01:04:50,722 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:51,484 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=PLANETUSDT&interval=15&limit=300 HTTP/1.1" 200 30880
+2024-05-11 01:04:51,759 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:00:56,678 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:00:57,075 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=SOLUSDT&interval=15&limit=300 HTTP/1.1" 200 24179
-2024-05-08 18:00:57,491 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 18
+2024-05-11 01:04:51,761 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:52,282 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=SOLUSDT&interval=15&limit=300 HTTP/1.1" 200 24198
+2024-05-11 01:04:52,723 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:00:57,494 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:00:58,306 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=LINKUSDT&interval=15&limit=300 HTTP/1.1" 200 25556
-2024-05-08 18:00:58,392 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 241
+2024-05-11 01:04:52,725 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:53,254 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=LINKUSDT&interval=15&limit=300 HTTP/1.1" 200 25537
+2024-05-11 01:04:53,508 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:00:58,394 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:00:58,715 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=FBUSDT&interval=15&limit=300 HTTP/1.1" 200 22447
-2024-05-08 18:00:58,721 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 9
+2024-05-11 01:04:53,509 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:54,243 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=FBUSDT&interval=15&limit=300 HTTP/1.1" 200 20031
+2024-05-11 01:04:54,503 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:00:58,723 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:00:59,021 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=APTUSDT&interval=15&limit=300 HTTP/1.1" 200 23885
-2024-05-08 18:00:59,235 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 4
+2024-05-11 01:04:54,506 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:55,024 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=APTUSDT&interval=15&limit=300 HTTP/1.1" 200 23823
+2024-05-11 01:04:55,280 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:00:59,237 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:00:59,637 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOGEUSDT&interval=15&limit=300 HTTP/1.1" 200 25723
-2024-05-08 18:00:59,643 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 8
+2024-05-11 01:04:55,282 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:56,415 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOGEUSDT&interval=15&limit=300 HTTP/1.1" 200 25702
+2024-05-11 01:04:56,695 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:00:59,645 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:01:00,046 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=TOMIUSDT&interval=15&limit=300 HTTP/1.1" 200 22218
-2024-05-08 18:01:00,052 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 4
+2024-05-11 01:04:56,696 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:57,223 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=TOMIUSDT&interval=15&limit=300 HTTP/1.1" 200 22107
+2024-05-11 01:04:57,659 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:01:00,054 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:01:01,070 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MATICUSDT&interval=15&limit=300 HTTP/1.1" 200 24239
-2024-05-08 18:01:01,076 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 79
+2024-05-11 01:04:57,661 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:58,198 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MATICUSDT&interval=15&limit=300 HTTP/1.1" 200 24180
+2024-05-11 01:04:58,483 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:01:01,078 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:01:01,362 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=AVAXUSDT&interval=15&limit=300 HTTP/1.1" 200 25580
-2024-05-08 18:01:01,370 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 9
+2024-05-11 01:04:58,485 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:04:59,015 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=AVAXUSDT&interval=15&limit=300 HTTP/1.1" 200 25602
+2024-05-11 01:04:59,303 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
-2024-05-08 18:01:01,372 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-08 18:01:01,787 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOTUSDT&interval=15&limit=300 HTTP/1.1" 200 22962
-2024-05-08 18:01:01,884 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 4
+2024-05-11 01:04:59,305 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-11 01:05:00,223 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOTUSDT&interval=15&limit=300 HTTP/1.1" 200 22904
+2024-05-11 01:05:00,707 ERROR 15min tf   
 Traceback (most recent call last):
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 939, in BTCUSDT_15min
-    dft = getCandlesHeikenAshi(symb, '15',300)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/andrew/Документы/GitHub/TraidingAlgorithm/main.py", line 104, in getCandlesHeikenAshi
-    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/usr/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5320, in __getitem__
-    return getitem(key)
-           ^^^^^^^^^^^^
-IndexError: index 0 is out of bounds for axis 0 with size 0
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
+    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
+    number = df.loc[index, 'shortOB']+1
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
+    raise KeyError(key)
+KeyError: 9

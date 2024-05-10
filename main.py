@@ -264,7 +264,9 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                 
                 high = df.iloc[index]['High']
                 if (not(high < bot)  ):
-                    df.iloc[index][ 'shortOB'] += 1
+                    #print(df)
+                    number = df.loc[index, 'shortOB']+1
+                    df.loc[index, 'shortOB'] = number
                     #fourth pattern (just sonarlab heikin ashi)
                     # url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     # data = {
@@ -470,7 +472,8 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
              for index in range(sbox, len(df)):
                 low = df.iloc[index]['Low']
                 if (not(low>top) ):
-                    df.iloc[index]['longOB'] += 1
+                    number = df.loc[index, 'longtOB']+1
+                    df.loc[index, 'longOB'] = number
                     #fourth pattern (just sonarlab heikin ashi)
                     # url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
                     # data = {
@@ -554,8 +557,19 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                     #     else: break
                     #     k_coin=0
                     #     ArcTop =0
+           
     if ((df.loc[:, 'longOB'].iloc[-1]!=0 ) or (df.loc[:, 'shortOB'].iloc[-1]!=0 )):
-        #fourth pattern (just sonarlab heikin ashi)
+    # ffile_path = 'longShort.txt'
+
+    # # Открытие файла для записи в конец
+    # with open(ffile_path, 'a') as file:
+    #     # Здесь ваши принты, которые будут записываться в файл
+    #     print(f"tf{tf} symble {symble} long {df.loc[:, 'longOB'].iloc[-1]} short {df.loc[:, 'shortOB'].iloc[-1]}", file=file)
+        
+
+    # # Закрытие файла после завершения работы
+    # file.close()
+            #fourth pattern (just sonarlab heikin ashi)
         url = "http://127.0.0.1:5000/api/v1/engulfing-pattern"
         data = {
             "trading_pair": str(symble),
@@ -676,7 +690,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
     
     
     
-    
+       
     return df
 
 
@@ -938,7 +952,8 @@ def BTCUSDT_15min():
         
             dft = getCandlesHeikenAshi(symb, '15',300)
             
-            getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)
+           
+            
             #getAlert5pattern(dft, '15min', 'Close', 28, 'HeikinAshi', symb)
             
             
@@ -973,7 +988,7 @@ while True:
     time.sleep(1)
     
 # BTCUSDT_60min()
-# BTCUSDT_30min()
+# BTCUSDT_240min()
 # BTCUSDT_15min()
 # BTCUSDT_5min()
 
