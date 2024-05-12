@@ -366,7 +366,9 @@ def BTCUSDT_15min():
             print("code is working 15 " + symb)
         
             dft = getCandlesHeikenAshi(symb, '15',300)
+            dft2 = copy.deepcopy(dft)
             
+            getAlert(dft2, '15min', 'Close', 28, 'HeikinAshi', symb)
            
             
             #getAlert5pattern(dft, '15min', 'Close', 28, 'HeikinAshi', symb)
