@@ -132,6 +132,7 @@ def getCandlesHeikenAshi(symb, tf, limit):
  
    
 def getAlert(df, tf, OBMitigationType, sens, candle, symble):
+    
     df['Date'] = pd.to_datetime(df['Date'])
     df.set_index('Date', inplace=True)  # Устанавливаем индекс в формате DatetimeIndex
     df.index.freq = tf  # Установка частоты в минутах
@@ -241,13 +242,14 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
         if keep_date:
             newShortBoxes.append(date)
 
-
+    
     shortBoxes = newShortBoxes
     
     # # Оповещения для медвежьих блоков
     #вхождение в одинарный шортбокс
     df['longOB'] = 0
     df['shortOB'] = 0
+     
     if (len(shortBoxes)>0):
          for i in range(0, len(shortBoxes)):
           
@@ -262,11 +264,15 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
                 
                 high = df.iloc[index]['High']
                 if (not(high < bot)  ):
+                    #print("inside get alert1")  
                     #print(df)
-                    number = df.loc[index, 'shortOB']+1
-                    df.loc[index, 'shortOB'] = number
+                    #print(df.iloc[index]['shortOB']+1)  
+                    number = df.iloc[index]['shortOB']+1
+                    #print(number)  
+                    df.at[df.index[index], 'shortOB'] = number
+                    #print(df)
                     
-       
+      
     # # Оповещения для бычьих блоков
     #вхождение в одинарный лонгбокс
     if (len(longBoxes) > 0):
@@ -281,10 +287,13 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
              for index in range(sbox, len(df)):
                 low = df.iloc[index]['Low']
                 if (not(low>top) ):
-                    number = df.loc[index, 'longtOB']+1
-                    df.loc[index, 'longOB'] = number
                     
-    print(df)
+                    number = df.iloc[index]['longOB']+1
+                    #print(number)  
+                    df.at[df.index[index], 'longOB'] = number
+                    #print(df)
+             
+    #print(df)
     
     # Теперь содержимое DataFrame будет записано в файл 'output.csv'  
     if ((df.loc[:, 'longOB'].iloc[-1]!=0 ) or (df.loc[:, 'shortOB'].iloc[-1]!=0 )):
@@ -303,7 +312,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
         } 
         requests.post(url=url, data=data, headers=headers)
         
-        
+    print("inside get alert9999")   
     
     
        
@@ -328,7 +337,7 @@ def BTCUSDT_240min():
         except Exception as e:
         
             
-            logging.exception(f"30min tf   ")
+            logging.exception(f"240min tf   ")
 def BTCUSDT_60min():
     symbs = ['BTCUSDT', 'ETHUSDT', 'MNTUSDT', 'XRPUSDT', 'CTCUSDT', 'PLANETUSDT', 'SOLUSDT', 'LINKUSDT', 'FBUSDT', 'APTUSDT', 'DOGEUSDT', 'TOMIUSDT', 'MATICUSDT', 'AVAXUSDT', 'DOTUSDT']
 
@@ -340,7 +349,9 @@ def BTCUSDT_60min():
             #getAlert(df, '60min', 'Close', 28, 'Candles', symb)
             dft = getCandlesHeikenAshi(symb, '60',300)
             dft2 = copy.deepcopy(dft)
+            
             getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', symb)
+            
             #getAlert5pattern(dft, '60min', 'Close', 28, 'HeikinAshi', symb)
             
         except Exception as e:
@@ -369,17 +380,17 @@ def BTCUSDT_15min():
 
 
 
-# schedule.every(60).minutes.do(BTCUSDT_60min)
-# schedule.every(240).minutes.do(BTCUSDT_240min)
-# schedule.every(15).minutes.do(BTCUSDT_15min)
-# # schedule.every(5).minutes.do(BTCUSDT_5min)
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
+schedule.every(60).minutes.do(BTCUSDT_60min)
+schedule.every(240).minutes.do(BTCUSDT_240min)
+schedule.every(15).minutes.do(BTCUSDT_15min)
+# schedule.every(5).minutes.do(BTCUSDT_5min)
+while True:
+    schedule.run_pending()
+    time.sleep(1)
     
-BTCUSDT_60min()
-BTCUSDT_240min()
-BTCUSDT_15min()
+# BTCUSDT_60min()
+# BTCUSDT_240min()
+# BTCUSDT_15min()
 # BTCUSDT_5min()
 
 
