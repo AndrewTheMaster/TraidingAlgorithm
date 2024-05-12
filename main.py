@@ -311,9 +311,8 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
             'Content-Type': 'application/json'
         } 
         requests.post(url=url, data=data, headers=headers)
-        
-    print("inside get alert9999")   
-    
+    logging.debug(f"shorts: {shortBoxes}")
+    logging.debug(f"longs: {longBoxes}")
     
        
     return df
@@ -382,17 +381,17 @@ def BTCUSDT_15min():
 
 
 
-schedule.every(60).minutes.do(BTCUSDT_60min)
-schedule.every(240).minutes.do(BTCUSDT_240min)
-schedule.every(15).minutes.do(BTCUSDT_15min)
-# schedule.every(5).minutes.do(BTCUSDT_5min)
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+# schedule.every(60).minutes.do(BTCUSDT_60min)
+# schedule.every(240).minutes.do(BTCUSDT_240min)
+# schedule.every(15).minutes.do(BTCUSDT_15min)
+# # schedule.every(5).minutes.do(BTCUSDT_5min)
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
     
-# BTCUSDT_60min()
-# BTCUSDT_240min()
-# BTCUSDT_15min()
+BTCUSDT_60min()
+BTCUSDT_240min()
+BTCUSDT_15min()
 # BTCUSDT_5min()
 
 
