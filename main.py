@@ -167,6 +167,8 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
     df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
     df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
     df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
+    df.loc[df['last_cross_index'].isnull(), 'last_cross_index'] = df['last_cross_index'].shift(1) + 1
+    
 
     ob_created_df = df[df['ob_created'] & df['last_cross_index'].shift(1).isnull()]
     ob_created_bull_df = df[df['ob_created_bull'] & df['last_cross_index'].shift(1).isnull()]
@@ -311,6 +313,7 @@ def getAlert(df, tf, OBMitigationType, sens, candle, symble):
             'Content-Type': 'application/json'
         } 
         requests.post(url=url, data=data, headers=headers)
+    logging.debug(f"tf: {tf} symble: {symble}")
     logging.debug(f"shorts: {shortBoxes}")
     logging.debug(f"longs: {longBoxes}")
     

@@ -1,285 +1,1252 @@
-2024-05-11 01:04:44,390 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:44,933 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=BTCUSDT&interval=15&limit=300 HTTP/1.1" 200 27852
-2024-05-11 01:04:45,375 ERROR 15min tf   
+2024-05-13 00:36:28,324 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:28,876 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=BTCUSDT&interval=60&limit=300 HTTP/1.1" 200 28230
+2024-05-13 00:36:29,087 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:29,621 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=BTCUSDT&interval=60&limit=300 HTTP/1.1" 200 28230
+2024-05-13 00:36:30,054 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:31,001 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=ETHUSDT&interval=60&limit=300 HTTP/1.1" 200 26740
+2024-05-13 00:36:31,231 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:31,763 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=ETHUSDT&interval=60&limit=300 HTTP/1.1" 200 26740
+2024-05-13 00:36:32,174 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:33,097 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MNTUSDT&interval=60&limit=300 HTTP/1.1" 200 25056
+2024-05-13 00:36:33,302 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:34,029 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MNTUSDT&interval=60&limit=300 HTTP/1.1" 200 25056
+2024-05-13 00:36:34,264 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:36:36,278 ERROR 60min tf   
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 276
-2024-05-11 01:04:45,379 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:46,315 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=ETHUSDT&interval=15&limit=300 HTTP/1.1" 200 26382
-2024-05-11 01:04:46,787 ERROR 15min tf   
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 9
-2024-05-11 01:04:46,789 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:47,323 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MNTUSDT&interval=15&limit=300 HTTP/1.1" 200 24548
-2024-05-11 01:04:47,826 ERROR 15min tf   
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202BB76D8E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 9
-2024-05-11 01:04:47,828 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:48,762 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=XRPUSDT&interval=15&limit=300 HTTP/1.1" 200 24660
-2024-05-11 01:04:49,264 ERROR 15min tf   
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB76D8E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 4
-2024-05-11 01:04:49,265 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:50,226 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=CTCUSDT&interval=15&limit=300 HTTP/1.1" 200 26349
-2024-05-11 01:04:50,720 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 356, in BTCUSDT_60min
+    getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB76D8E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:36:36,285 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:37,224 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=XRPUSDT&interval=60&limit=300 HTTP/1.1" 200 25090
+2024-05-13 00:36:37,431 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:38,390 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=XRPUSDT&interval=60&limit=300 HTTP/1.1" 200 25090
+2024-05-13 00:36:38,847 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:39,396 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=CTCUSDT&interval=60&limit=300 HTTP/1.1" 200 26641
+2024-05-13 00:36:39,404 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:39,929 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=CTCUSDT&interval=60&limit=300 HTTP/1.1" 200 26641
+2024-05-13 00:36:40,472 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:41,028 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=PLANETUSDT&interval=60&limit=300 HTTP/1.1" 200 31183
+2024-05-13 00:36:41,264 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:42,425 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=PLANETUSDT&interval=60&limit=300 HTTP/1.1" 200 31183
+2024-05-13 00:36:42,717 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:36:44,746 ERROR 60min tf   
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 62
-2024-05-11 01:04:50,722 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:51,484 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=PLANETUSDT&interval=15&limit=300 HTTP/1.1" 200 30880
-2024-05-11 01:04:51,759 ERROR 15min tf   
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 18
-2024-05-11 01:04:51,761 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:52,282 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=SOLUSDT&interval=15&limit=300 HTTP/1.1" 200 24198
-2024-05-11 01:04:52,723 ERROR 15min tf   
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202B9BBDE20>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 241
-2024-05-11 01:04:52,725 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:53,254 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=LINKUSDT&interval=15&limit=300 HTTP/1.1" 200 25537
-2024-05-11 01:04:53,508 ERROR 15min tf   
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202B9BBDE20>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 9
-2024-05-11 01:04:53,509 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:54,243 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=FBUSDT&interval=15&limit=300 HTTP/1.1" 200 20031
-2024-05-11 01:04:54,503 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 356, in BTCUSDT_60min
+    getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202B9BBDE20>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:36:44,750 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:45,284 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=SOLUSDT&interval=60&limit=300 HTTP/1.1" 200 24552
+2024-05-13 00:36:45,503 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:46,303 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=SOLUSDT&interval=60&limit=300 HTTP/1.1" 200 24552
+2024-05-13 00:36:46,526 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:36:48,542 ERROR 60min tf   
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 4
-2024-05-11 01:04:54,506 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:55,024 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=APTUSDT&interval=15&limit=300 HTTP/1.1" 200 23823
-2024-05-11 01:04:55,280 ERROR 15min tf   
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 8
-2024-05-11 01:04:55,282 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:56,415 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOGEUSDT&interval=15&limit=300 HTTP/1.1" 200 25702
-2024-05-11 01:04:56,695 ERROR 15min tf   
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202BB4F2FF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 4
-2024-05-11 01:04:56,696 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:57,223 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=TOMIUSDT&interval=15&limit=300 HTTP/1.1" 200 22107
-2024-05-11 01:04:57,659 ERROR 15min tf   
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB4F2FF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 79
-2024-05-11 01:04:57,661 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:58,198 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MATICUSDT&interval=15&limit=300 HTTP/1.1" 200 24180
-2024-05-11 01:04:58,483 ERROR 15min tf   
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 356, in BTCUSDT_60min
+    getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB4F2FF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:36:48,547 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:49,529 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=LINKUSDT&interval=60&limit=300 HTTP/1.1" 200 25923
+2024-05-13 00:36:49,716 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:50,466 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=LINKUSDT&interval=60&limit=300 HTTP/1.1" 200 25923
+2024-05-13 00:36:50,690 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:36:52,720 ERROR 60min tf   
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 9
-2024-05-11 01:04:58,485 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:04:59,015 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=AVAXUSDT&interval=15&limit=300 HTTP/1.1" 200 25602
-2024-05-11 01:04:59,303 ERROR 15min tf   
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 4
-2024-05-11 01:04:59,305 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
-2024-05-11 01:05:00,223 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOTUSDT&interval=15&limit=300 HTTP/1.1" 200 22904
-2024-05-11 01:05:00,707 ERROR 15min tf   
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202BB4F2FF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 955, in BTCUSDT_15min
-    print(str(getAlert(dft, '15min', 'Close', 28, 'HeikinAshi', symb)))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 268, in getAlert
-    number = df.loc[index, 'shortOB']+1
-             ~~~~~~^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexing.py", line 1183, in __getitem__
-    return self.obj._get_value(*key, takeable=self._takeable)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py", line 4221, in _get_value
-    row = self.index.get_loc(index)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py", line 627, in get_loc
-    raise KeyError(key)
-KeyError: 9
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB4F2FF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 356, in BTCUSDT_60min
+    getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB4F2FF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:36:52,724 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:53,250 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=FBUSDT&interval=60&limit=300 HTTP/1.1" 200 21685
+2024-05-13 00:36:53,257 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:54,014 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=FBUSDT&interval=60&limit=300 HTTP/1.1" 200 None
+2024-05-13 00:36:54,249 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:36:56,286 ERROR 60min tf   
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202BB76E960>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB76E960>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 356, in BTCUSDT_60min
+    getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB76E960>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:36:56,290 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:56,863 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=APTUSDT&interval=60&limit=300 HTTP/1.1" 200 24247
+2024-05-13 00:36:56,872 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:36:57,464 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=APTUSDT&interval=60&limit=300 HTTP/1.1" 200 24248
+2024-05-13 00:36:57,675 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:36:59,701 ERROR 60min tf   
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202BB7A3FB0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB7A3FB0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 356, in BTCUSDT_60min
+    getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB7A3FB0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:36:59,705 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:00,300 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOGEUSDT&interval=60&limit=300 HTTP/1.1" 200 26112
+2024-05-13 00:37:00,319 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:01,289 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOGEUSDT&interval=60&limit=300 HTTP/1.1" 200 26113
+2024-05-13 00:37:01,697 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:02,433 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=TOMIUSDT&interval=60&limit=300 HTTP/1.1" 200 22569
+2024-05-13 00:37:02,441 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:02,976 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=TOMIUSDT&interval=60&limit=300 HTTP/1.1" 200 22569
+2024-05-13 00:37:03,217 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:04,165 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MATICUSDT&interval=60&limit=300 HTTP/1.1" 200 24594
+2024-05-13 00:37:04,382 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:05,345 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MATICUSDT&interval=60&limit=300 HTTP/1.1" 200 24594
+2024-05-13 00:37:05,827 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:06,659 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=AVAXUSDT&interval=60&limit=300 HTTP/1.1" 200 25945
+2024-05-13 00:37:06,672 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:07,201 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=AVAXUSDT&interval=60&limit=300 HTTP/1.1" 200 25945
+2024-05-13 00:37:07,436 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:37:09,482 ERROR 60min tf   
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202BB3E8D10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB3E8D10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 356, in BTCUSDT_60min
+    getAlert(dft2, '60min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB3E8D10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:37:09,486 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:10,561 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOTUSDT&interval=60&limit=300 HTTP/1.1" 200 23347
+2024-05-13 00:37:10,777 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:11,313 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOTUSDT&interval=60&limit=300 HTTP/1.1" 200 23347
+2024-05-13 00:37:11,534 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:12,092 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=BTCUSDT&interval=240&limit=300 HTTP/1.1" 200 28587
+2024-05-13 00:37:12,355 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:13,293 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=BTCUSDT&interval=240&limit=300 HTTP/1.1" 200 28587
+2024-05-13 00:37:13,722 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:37:15,755 ERROR 240min tf   
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202BB3E8D10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB3E8D10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 337, in BTCUSDT_240min
+    getAlert(dft2, '240min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB3E8D10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:37:15,759 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:16,294 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=ETHUSDT&interval=240&limit=300 HTTP/1.1" 200 27109
+2024-05-13 00:37:16,300 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:16,834 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=ETHUSDT&interval=240&limit=300 HTTP/1.1" 200 27109
+2024-05-13 00:37:17,046 ERROR 240min tf   
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 335, in BTCUSDT_240min
+    dft = getCandlesHeikenAshi(symb, '240',300)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 104, in getCandlesHeikenAshi
+    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\base.py", line 5389, in __getitem__
+    return getitem(key)
+           ^^^^^^^^^^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+2024-05-13 00:37:17,051 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:17,586 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MNTUSDT&interval=240&limit=300 HTTP/1.1" 200 25380
+2024-05-13 00:37:17,594 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:18,727 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MNTUSDT&interval=240&limit=300 HTTP/1.1" 200 25382
+2024-05-13 00:37:18,738 ERROR 240min tf   
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 335, in BTCUSDT_240min
+    dft = getCandlesHeikenAshi(symb, '240',300)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 104, in getCandlesHeikenAshi
+    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\base.py", line 5389, in __getitem__
+    return getitem(key)
+           ^^^^^^^^^^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+2024-05-13 00:37:18,741 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:19,677 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=XRPUSDT&interval=240&limit=300 HTTP/1.1" 200 25585
+2024-05-13 00:37:19,889 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:21,034 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=XRPUSDT&interval=240&limit=300 HTTP/1.1" 200 25586
+2024-05-13 00:37:21,041 ERROR 240min tf   
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 335, in BTCUSDT_240min
+    dft = getCandlesHeikenAshi(symb, '240',300)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 104, in getCandlesHeikenAshi
+    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\base.py", line 5389, in __getitem__
+    return getitem(key)
+           ^^^^^^^^^^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+2024-05-13 00:37:21,045 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:22,180 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=CTCUSDT&interval=240&limit=300 HTTP/1.1" 200 27220
+2024-05-13 00:37:22,187 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:23,099 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=CTCUSDT&interval=240&limit=300 HTTP/1.1" 200 27220
+2024-05-13 00:37:23,553 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:24,490 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=PLANETUSDT&interval=240&limit=300 HTTP/1.1" 200 31732
+2024-05-13 00:37:24,701 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:25,848 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=PLANETUSDT&interval=240&limit=300 HTTP/1.1" 200 31732
+2024-05-13 00:37:25,866 ERROR 240min tf   
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 335, in BTCUSDT_240min
+    dft = getCandlesHeikenAshi(symb, '240',300)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 104, in getCandlesHeikenAshi
+    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\base.py", line 5389, in __getitem__
+    return getitem(key)
+           ^^^^^^^^^^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+2024-05-13 00:37:25,869 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:26,403 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=SOLUSDT&interval=240&limit=300 HTTP/1.1" 200 24983
+2024-05-13 00:37:26,617 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:27,556 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=SOLUSDT&interval=240&limit=300 HTTP/1.1" 200 24983
+2024-05-13 00:37:27,787 ERROR 240min tf   
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 335, in BTCUSDT_240min
+    dft = getCandlesHeikenAshi(symb, '240',300)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 104, in getCandlesHeikenAshi
+    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\base.py", line 5389, in __getitem__
+    return getitem(key)
+           ^^^^^^^^^^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+2024-05-13 00:37:27,791 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:28,934 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=LINKUSDT&interval=240&limit=300 HTTP/1.1" 200 26344
+2024-05-13 00:37:28,952 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:29,698 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=LINKUSDT&interval=240&limit=300 HTTP/1.1" 200 26344
+2024-05-13 00:37:29,713 ERROR 240min tf   
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 335, in BTCUSDT_240min
+    dft = getCandlesHeikenAshi(symb, '240',300)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 104, in getCandlesHeikenAshi
+    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\base.py", line 5389, in __getitem__
+    return getitem(key)
+           ^^^^^^^^^^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+2024-05-13 00:37:29,715 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:30,842 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=FBUSDT&interval=240&limit=300 HTTP/1.1" 200 22328
+2024-05-13 00:37:30,848 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:31,385 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=FBUSDT&interval=240&limit=300 HTTP/1.1" 200 22328
+2024-05-13 00:37:31,598 ERROR 240min tf   
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 335, in BTCUSDT_240min
+    dft = getCandlesHeikenAshi(symb, '240',300)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 104, in getCandlesHeikenAshi
+    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\base.py", line 5389, in __getitem__
+    return getitem(key)
+           ^^^^^^^^^^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+2024-05-13 00:37:31,601 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:32,138 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=APTUSDT&interval=240&limit=300 HTTP/1.1" 200 25233
+2024-05-13 00:37:32,343 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:32,875 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=APTUSDT&interval=240&limit=300 HTTP/1.1" 200 25233
+2024-05-13 00:37:33,074 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:37:35,095 ERROR 240min tf   
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202BB758DA0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB758DA0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 337, in BTCUSDT_240min
+    getAlert(dft2, '240min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB758DA0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:37:35,099 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:36,246 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOGEUSDT&interval=240&limit=300 HTTP/1.1" 200 26503
+2024-05-13 00:37:36,253 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:36,979 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOGEUSDT&interval=240&limit=300 HTTP/1.1" 200 26503
+2024-05-13 00:37:37,224 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:38,366 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=TOMIUSDT&interval=240&limit=300 HTTP/1.1" 200 23043
+2024-05-13 00:37:38,373 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:38,904 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=TOMIUSDT&interval=240&limit=300 HTTP/1.1" 200 23043
+2024-05-13 00:37:39,128 ERROR 240min tf   
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 335, in BTCUSDT_240min
+    dft = getCandlesHeikenAshi(symb, '240',300)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 104, in getCandlesHeikenAshi
+    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\base.py", line 5389, in __getitem__
+    return getitem(key)
+           ^^^^^^^^^^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+2024-05-13 00:37:39,131 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:39,658 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MATICUSDT&interval=240&limit=300 HTTP/1.1" 200 25066
+2024-05-13 00:37:39,665 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:40,794 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MATICUSDT&interval=240&limit=300 HTTP/1.1" 200 25066
+2024-05-13 00:37:40,810 ERROR 240min tf   
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 335, in BTCUSDT_240min
+    dft = getCandlesHeikenAshi(symb, '240',300)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 104, in getCandlesHeikenAshi
+    start_index = m[m['Date'] == pd.to_datetime(start_date)].index[0]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\base.py", line 5389, in __getitem__
+    return getitem(key)
+           ^^^^^^^^^^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+2024-05-13 00:37:40,813 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:41,750 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=AVAXUSDT&interval=240&limit=300 HTTP/1.1" 200 26278
+2024-05-13 00:37:41,964 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:42,487 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=AVAXUSDT&interval=240&limit=300 HTTP/1.1" 200 26278
+2024-05-13 00:37:42,936 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:37:44,973 ERROR 240min tf   
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202BB7F6AE0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB7F6AE0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 337, in BTCUSDT_240min
+    getAlert(dft2, '240min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB7F6AE0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:37:44,979 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:45,503 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOTUSDT&interval=240&limit=300 HTTP/1.1" 200 23806
+2024-05-13 00:37:45,511 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:46,244 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOTUSDT&interval=240&limit=300 HTTP/1.1" 200 23806
+2024-05-13 00:37:46,490 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:37:48,547 ERROR 240min tf   
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202B9BBDE20>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202B9BBDE20>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 337, in BTCUSDT_240min
+    getAlert(dft2, '240min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202B9BBDE20>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:37:48,551 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:49,097 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=BTCUSDT&interval=15&limit=300 HTTP/1.1" 200 27744
+2024-05-13 00:37:49,342 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:50,298 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=ETHUSDT&interval=15&limit=300 HTTP/1.1" 200 26243
+2024-05-13 00:37:50,826 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:51,568 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MNTUSDT&interval=15&limit=300 HTTP/1.1" 200 24513
+2024-05-13 00:37:51,941 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:52,660 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=XRPUSDT&interval=15&limit=300 HTTP/1.1" 200 24548
+2024-05-13 00:37:52,953 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:37:54,986 ERROR 15min tf   
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202B9BBDE20>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202B9BBDE20>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 374, in BTCUSDT_15min
+    getAlert(dft2, '15min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202B9BBDE20>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:37:54,991 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:55,516 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=CTCUSDT&interval=15&limit=300 HTTP/1.1" 200 25993
+2024-05-13 00:37:56,082 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:56,598 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=PLANETUSDT&interval=15&limit=300 HTTP/1.1" 200 None
+2024-05-13 00:37:56,851 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:57,376 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=SOLUSDT&interval=15&limit=300 HTTP/1.1" 200 24042
+2024-05-13 00:37:57,866 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:58,995 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=LINKUSDT&interval=15&limit=300 HTTP/1.1" 200 25351
+2024-05-13 00:37:59,334 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:37:59,868 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=FBUSDT&interval=15&limit=300 HTTP/1.1" 200 18382
+2024-05-13 00:38:00,069 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:38:00,598 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=APTUSDT&interval=15&limit=300 HTTP/1.1" 200 23666
+2024-05-13 00:38:01,181 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:38:03,207 ERROR 15min tf   
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202BB737BF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB737BF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 374, in BTCUSDT_15min
+    getAlert(dft2, '15min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB737BF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:38:03,211 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:38:03,733 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOGEUSDT&interval=15&limit=300 HTTP/1.1" 200 25541
+2024-05-13 00:38:04,132 DEBUG Starting new HTTP connection (1): 127.0.0.1:5000
+2024-05-13 00:38:06,161 ERROR 15min tf   
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 400, in request
+    self.endheaders()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1035, in send
+    self.connect()
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 238, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000202BB79DEB0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB79DEB0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 374, in BTCUSDT_15min
+    getAlert(dft2, '15min', 'Close', 28, 'HeikinAshi', symb)
+  File "c:\Users\andrew\Documents\GitHub\TraidingAlgorithm\main.py", line 313, in getAlert
+    requests.post(url=url, data=data, headers=headers)
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\andrew\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /api/v1/engulfing-pattern (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000202BB79DEB0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-05-13 00:38:06,165 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:38:07,117 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=TOMIUSDT&interval=15&limit=300 HTTP/1.1" 200 21620
+2024-05-13 00:38:07,600 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:38:08,149 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=MATICUSDT&interval=15&limit=300 HTTP/1.1" 200 24017
+2024-05-13 00:38:08,475 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:38:09,013 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=AVAXUSDT&interval=15&limit=300 HTTP/1.1" 200 25467
+2024-05-13 00:38:09,597 DEBUG Starting new HTTPS connection (1): api.bybit.com:443
+2024-05-13 00:38:10,131 DEBUG https://api.bybit.com:443 "GET /v5/market/kline?category=spot&symbol=DOTUSDT&interval=15&limit=300 HTTP/1.1" 200 22766
